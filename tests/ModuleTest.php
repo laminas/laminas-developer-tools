@@ -1,12 +1,12 @@
 <?php
 
-namespace ZendDeveloperToolsTest;
-use PHPUnit_Framework_TestCase;
+namespace LaminasTest\DeveloperTools;
+use Laminas\DeveloperTools\Module;
 use PHPUnit_Framework_Assert;
 use PHPUnit_Framework_MockObject_MockObject;
-use ZendDeveloperTools\Module;
-use Symfony\Component\Console\Output\OutputInterface;
+use PHPUnit_Framework_TestCase;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ModuleTest extends PHPUnit_Framework_TestCase
 {

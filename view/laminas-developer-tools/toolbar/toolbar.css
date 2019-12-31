@@ -1,0 +1,295 @@
+#laminas-developer-toolbar {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    color: #eee;
+    z-index: 1337;
+    position: fixed;
+    border-top: 1px solid #111;
+    background: #2C2C2C;
+    background: -moz-linear-gradient(to bottom, #333, #222);
+    background: -ms-linear-gradient(to bottom, #333, #222);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#333), to(#222));
+    background: -webkit-linear-gradient(to bottom, 333, #222);
+    background: -o-linear-gradient(to bottom, #333, #222);
+    background: linear-gradient(to bottom, #333, #222);
+    font: normal 13px/40px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    direction: ltr;
+    text-align: left;
+}
+
+#laminas-developer-toolbar a {
+    color: #80dc09;
+    text-decoration: none;
+}
+
+#laminas-developer-toolbar a:hover {
+    text-decoration: underline;
+}
+
+.laminas-toolbar-bold {
+    font-weight: bold;
+}
+
+.laminas-toolbar-entry,.laminas-toolbar-detail {
+    float: left;
+    display: block;
+    padding: 0 8px;
+    background: transparent;
+}
+
+.laminas-toolbar-info {
+    vertical-align: middle;
+}
+
+.laminas-toolbar-info abbr {
+    border: 0;
+    font-size: 100%;
+    cursor: pointer;
+    text-transform: none;
+}
+
+.laminas-toolbar-detail .laminas-toolbar-info {
+    clear: both;
+    display: block;
+    max-width: 300px;
+    white-space: normal;
+}
+
+.laminas-toolbar-detail .laminas-toolbar-info-heading {
+    color: #80dc09;
+    font-weight: bold;
+}
+
+.laminas-toolbar-detail .laminas-toolbar-info-heading:before {
+    content: '» ';
+}
+
+.laminas-toolbar-info .laminas-toolbar-spacing {
+    padding: 0;
+    margin-right: 7px;
+}
+
+.laminas-toolbar-detail .laminas-toolbar-spacing {
+    padding-bottom: 15px;
+}
+
+.laminas-toolbar-detail .laminas-toolbar-topspacing {
+    padding-top: 15px;
+}
+
+.laminas-toolbar-detail {
+    bottom: 39px;
+    display: none;
+    line-height: 20px;
+    padding: 7px 10px;
+    position: absolute;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.laminas-toolbar-detail:before,.laminas-toolbar-detail:after {
+    content: '';
+    width: 0;
+    height: 0;
+    left: 14px;
+    bottom: -10px;
+    position: absolute;
+    border-top: 10px solid #68B604;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
+
+.laminas-toolbar-detail-overflow {
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    max-height: 475px;
+}
+
+.laminas-toolbar-detail-overflow:before, .laminas-toolbar-detail-overflow:after {
+    display: none;
+}
+
+.laminas-toolbar-detail-redundant {
+    display: none;
+    opacity: 0;
+}
+
+.laminas-toolbar-detail .laminas-toolbar-info-redundant,.laminas-toolbar-detail .laminas-toolbar-extra-info-redundant
+{
+    display: none;
+}
+
+.laminas-toolbar-preview img {
+    border: 0;
+    width: auto;
+    display: inline;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.laminas-toolbar-entry:hover .laminas-toolbar-detail {
+    display: block;
+    background: #333;
+    box-shadow: rgba(0, 0, 0, 0.75) 0 0 7px;
+}
+
+.laminas-toolbar-info .laminas-detail-label {
+    float: left;
+    display: block;
+    text-align: left;
+    min-width: 100px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.laminas-toolbar-info .laminas-detail-context {
+    text-align: left;
+    clear: both;
+    min-width: 100px;
+    color: #aaaaaa;
+    font-size: 9px;
+    margin-bottom: 3px;
+    line-height: 10px;
+    white-space: nowrap;
+}
+
+.laminas-toolbar-detail-overflow .laminas-detail-context {
+    padding-right: 15px;
+}
+
+.laminas-toolbar-info .laminas-detail-label:after {
+    content: ':';
+}
+
+.laminas-toolbar-info .laminas-detail-value {
+    float: left;
+    display: block;
+    white-space: nowrap;
+}
+
+.laminas-toolbar-info .laminas-detail-pre {
+    display: block;
+    font-family: monospace;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    line-height: 15px;
+    max-height: 400px;
+    unicode-bidi: embed;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.laminas-toolbar-info .laminas-detail-extra-value {
+    margin-left: 100px;
+}
+
+.laminas-toolbar-info .laminas-detail-value-right {
+    float: right;
+}
+
+.laminas-toolbar-info .laminas-toolbar-status {
+    color: #fff;
+    padding: 0 3px;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.laminas-toolbar-status-green {
+    background: #558f0b;
+}
+
+.laminas-toolbar-status-red {
+    background: #8f2727;
+}
+
+.laminas-toolbar-color-green {
+    color: #80dc09;
+}
+
+.laminas-toolbar-color-red {
+    color: #e83535;
+}
+
+.laminas-toolbar-color-yellow {
+    color: #d9cd0f;
+}
+
+.laminas-toolbar-color-grey {
+    color: #9d9d9d;
+}
+
+#laminas-developer-toolbar .laminas-toolbar-hide-button {
+    top: 0;
+    right: 8px;
+    color: #bebebe;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    text-decoration: none;
+}
+
+#laminas-developer-toolbar .laminas-toolbar-hide-button:hover {
+    color: #eb4a4a;
+    text-decoration: none;
+}
+
+#laminas-developer-toolbar .laminas-toolbar-entry .laminas-toolbar-detail,#laminas-developer-toolbar .laminas-toolbar-entry .laminas-toolbar-info {
+    font-size: 11px;
+    max-width: 700px;
+}
+
+#laminas-developer-toolbar .laminas-toolbar-info .laminas-detail-value pre {
+    max-height: 350px;
+    max-width: 650px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    display: inline-block;
+    white-space: pre;
+    word-break: keep-all;
+    word-wrap: normal;
+}
+
+@media screen and (max-width: 780px) {
+    .laminas-toolbar-preview .laminas-toolbar-extra-info {
+        display: none;
+    }
+    .laminas-toolbar-entry:hover .laminas-toolbar-extra-info-redundant {
+        display: block;
+    }
+    .laminas-toolbar-preview .laminas-toolbar-spacing {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .laminas-toolbar-preview .laminas-toolbar-info {
+        display: none;
+    }
+    .laminas-toolbar-entry:hover .laminas-toolbar-detail-redundant {
+        display: block;
+        opacity: 1;
+    }
+    .laminas-toolbar-entry:hover .laminas-toolbar-info-redundant {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .laminas-toolbar-preview img {
+        margin: 0;
+    }
+}
+
+@media print {
+    #laminas-developer-toolbar {
+        display: none;
+    }
+}
