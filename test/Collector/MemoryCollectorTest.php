@@ -1,7 +1,7 @@
 <?php
-namespace ZendDeveloperToolsTest\Collector;
+namespace LaminasTest\DeveloperTools\Collector;
 
-use ZendDeveloperTools\Collector\MemoryCollector;
+use Laminas\DeveloperTools\Collector\MemoryCollector;
 
 class MemoryCollectorTest extends \PHPUnit_Framework_TestCase
 {
@@ -9,7 +9,7 @@ class MemoryCollectorTest extends \PHPUnit_Framework_TestCase
     {
         $collector = new MemoryCollector();
 
-        $mvcEvent = $this->getMockBuilder("Zend\Mvc\MvcEvent")
+        $mvcEvent = $this->getMockBuilder("Laminas\Mvc\MvcEvent")
             ->getMock();
 
         $collector->collect($mvcEvent);

@@ -1,15 +1,14 @@
 <?php
+
 /**
- * Zend Developer Tools for Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendDeveloperTools for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendDeveloperTools;
+namespace Laminas\DeveloperTools;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * @todo storage and firephp options
@@ -64,11 +63,11 @@ class Options extends AbstractOptions
         'position'      => 'bottom',
         'version_check' => false,
         'entries'       => [
-            'request' => 'zend-developer-tools/toolbar/request',
-            'time'    => 'zend-developer-tools/toolbar/time',
-            'memory'  => 'zend-developer-tools/toolbar/memory',
-            'config'  => 'zend-developer-tools/toolbar/config',
-            'db'      => 'zend-developer-tools/toolbar/db',
+            'request' => 'laminas-developer-tools/toolbar/request',
+            'time'    => 'laminas-developer-tools/toolbar/time',
+            'memory'  => 'laminas-developer-tools/toolbar/memory',
+            'config'  => 'laminas-developer-tools/toolbar/config',
+            'db'      => 'laminas-developer-tools/toolbar/db',
         ],
     ];
 
@@ -77,7 +76,7 @@ class Options extends AbstractOptions
      *
      * @param  array|Traversable|null $options
      * @param  ReportInterface        $report
-     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
+     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
      */
     public function __construct($options, ReportInterface $report)
     {
@@ -148,7 +147,7 @@ class Options extends AbstractOptions
     {
         if (! is_array($options)) {
             $this->report->addError(sprintf(
-                "['zenddevelopertools']['profiler']['matcher'] must be an array, %s given.",
+                "['laminas-developer-tools']['profiler']['matcher'] must be an array, %s given.",
                 gettype($options)
             ));
             return;
@@ -166,7 +165,7 @@ class Options extends AbstractOptions
     {
         if (! is_array($options)) {
             $this->report->addError(sprintf(
-                "['zenddevelopertools']['profiler']['collectors'] must be an array, %s given.",
+                "['laminas-developer-tools']['profiler']['collectors'] must be an array, %s given.",
                 gettype($options)
             ));
             return;
@@ -201,7 +200,7 @@ class Options extends AbstractOptions
     {
         if (! is_array($options)) {
             $this->report->addError(sprintf(
-                "['zenddevelopertools']['events']['collectors'] must be an array, %s given.",
+                "['laminas-developer-tools']['events']['collectors'] must be an array, %s given.",
                 gettype($options)
             ));
             return;
@@ -227,7 +226,7 @@ class Options extends AbstractOptions
     {
         if (! is_array($options)) {
             $this->report->addError(sprintf(
-                '[\'zenddevelopertools\'][\'events\'][\'identifiers\'] must be an array, %s given.',
+                '[\'laminas-developer-tools\'][\'events\'][\'identifiers\'] must be an array, %s given.',
                 gettype($options)
             ));
             return;
@@ -341,7 +340,7 @@ class Options extends AbstractOptions
                 case 'position':
                     if ($value !== 'bottom' && $value !== 'top') {
                         $this->report->addError(sprintf(
-                            "['zenddevelopertools']['toolbar']['position'] must be 'top' or 'bottom', %s given.",
+                            "['laminas-developer-tools']['toolbar']['position'] must be 'top' or 'bottom', %s given.",
                             $value
                         ));
                         continue;
@@ -351,7 +350,7 @@ class Options extends AbstractOptions
                 case 'entries':
                     if (! is_array($value)) {
                         $this->report->addError(sprintf(
-                            "['zenddevelopertools']['toolbar']['entries'] must be an array, %s given.",
+                            "['laminas-developer-tools']['toolbar']['entries'] must be an array, %s given.",
                             gettype($value)
                         ));
                     }
@@ -384,7 +383,7 @@ class Options extends AbstractOptions
     }
 
     /**
-     * Is the Zend Framework version check enabled?
+     * Is the Laminas version check enabled?
      *
      * @return bool
      */

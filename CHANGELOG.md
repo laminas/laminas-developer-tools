@@ -6,10 +6,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#217](https://github.com/zendframework/ZendDeveloperTools/pull/217) adds
+- [zendframework/zend-developer-tools#217](https://github.com/zendframework/ZendDeveloperTools/pull/217) adds
   support in the `SerializableException` for PHP 7 Throwables, including Error
   types.
-- [#220](https://github.com/zendframework/ZendDeveloperTools/pull/220) adds
+- [zendframework/zend-developer-tools#220](https://github.com/zendframework/ZendDeveloperTools/pull/220) adds
   support for displaying matched route parameters other than just the controller
   and action.
 
@@ -23,19 +23,19 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#215](https://github.com/zendframework/ZendDeveloperTools/pull/215) replaces
-  the ZF logo to remove the "2".
-- [#218](https://github.com/zendframework/ZendDeveloperTools/pull/218) updates
-  the logic for retrieving a zend-db `Adapter` to only do so if `db`
+- [zendframework/zend-developer-tools#215](https://github.com/zendframework/ZendDeveloperTools/pull/215) replaces
+  the Laminas logo to remove the "2".
+- [zendframework/zend-developer-tools#218](https://github.com/zendframework/ZendDeveloperTools/pull/218) updates
+  the logic for retrieving a laminas-db `Adapter` to only do so if `db`
   configuration also exists; this ensures the toolbar does not cause a fatal
-  error if zend-db is installed but no adapter configured.
+  error if laminas-db is installed but no adapter configured.
 
 ## 1.1.0 - 2016-06-27
 
 ### Added
 
-- [#213](https://github.com/zendframework/ZendDeveloperTools/pull/213) adds
-  support for zend-mvc, zend-eventmanager, and zend-servicemanager v3.
+- [zendframework/zend-developer-tools#213](https://github.com/zendframework/ZendDeveloperTools/pull/213) adds
+  support for laminas-mvc, laminas-eventmanager, and laminas-servicemanager v3.
 
 ### Deprecated
 

@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/ZendDeveloperTools for the canonical source repository
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendDeveloperToolsTest\Exception;
+namespace LaminasTest\DeveloperTools\Exception;
 
 use Exception;
+use Laminas\DeveloperTools\Exception\SerializableException;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
 use Throwable;
-use ZendDeveloperTools\Exception\SerializableException;
 
 class SerializableExceptionTest extends TestCase
 {

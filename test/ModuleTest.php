@@ -1,9 +1,9 @@
 <?php
 
-namespace ZendDeveloperToolsTest;
+namespace LaminasTest\DeveloperTools;
 
+use Laminas\DeveloperTools\Module;
 use PHPUnit_Framework_TestCase;
-use ZendDeveloperTools\Module;
 
 class ModuleTest extends PHPUnit_Framework_TestCase
 {

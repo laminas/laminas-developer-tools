@@ -1,22 +1,20 @@
 <?php
+
 /**
- * Zend Developer Tools for Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendDeveloperTools for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   ZendDeveloperTools
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendDeveloperTools;
+namespace Laminas\DeveloperTools;
 
 use DateTime;
 use DateTimezone;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\Mvc\MvcEvent;
-use Zend\Stdlib\PriorityQueue;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerAwareInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Stdlib\PriorityQueue;
 
 class Profiler implements EventManagerAwareInterface
 {
