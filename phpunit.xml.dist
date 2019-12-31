@@ -9,9 +9,8 @@
     stopOnFailure="false"
     processIsolation="false"
     backupGlobals="false"
-    syntaxCheck="true"
 >
-    <testsuite name="ZendDeveloperTools tests suite">
+    <testsuite name="Laminas\DeveloperTools tests suite">
         <directory>./test</directory>
     </testsuite>
     <filter>
