@@ -1,15 +1,16 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/ZendDeveloperTools for the canonical source repository
- * @copyright Copyright (c) 2011-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/ZendDeveloperTools/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendDeveloperTools\Collector;
+namespace Laminas\DeveloperTools\Collector;
 
-use Zend\Mvc\MvcEvent;
-use Zend\View\Model\ModelInterface;
-use Zend\View\Variables;
+use Laminas\Mvc\MvcEvent;
+use Laminas\View\Model\ModelInterface;
+use Laminas\View\Variables;
 
 /**
  * Request Data Collector.

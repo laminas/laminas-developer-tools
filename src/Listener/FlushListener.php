@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/ZendDeveloperTools for the canonical source repository
- * @copyright Copyright (c) 2011-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/ZendDeveloperTools/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendDeveloperTools\Listener;
+namespace Laminas\DeveloperTools\Listener;
 
-use ZendDeveloperTools\Profiler;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\Mvc\MvcEvent;
-use Zend\Stdlib\ResponseInterface;
+use Laminas\DeveloperTools\Profiler;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Stdlib\ResponseInterface;
 
 /**
  * Flush Listener

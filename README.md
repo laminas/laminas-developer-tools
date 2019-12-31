@@ -1,34 +1,34 @@
-# Zend Developer Tools
+# Laminas Developer Tools
 
-[![Build Status](https://secure.travis-ci.org/zendframework/ZendDeveloperTools.svg?branch=master)](https://secure.travis-ci.org/zendframework/ZendDeveloperTools)
-[![Coverage Status](https://coveralls.io/repos/github/zendframework/ZendDeveloperTools/badge.svg?branch=master)](https://coveralls.io/github/zendframework/ZendDeveloperTools?branch=master)
+[![Build Status](https://travis-ci.org/laminas/LaminasDeveloperTools.svg?branch=master)](https://travis-ci.org/laminas/LaminasDeveloperTools)
+[![Coverage Status](https://coveralls.io/repos/github/laminas/LaminasDeveloperTools/badge.svg?branch=master)](https://coveralls.io/github/laminas/LaminasDeveloperTools?branch=master)
 
-Module providing debug tools for use with [zend-mvc](https://docs.zendframework.com/zend-mvc) applications.
+Module providing debug tools for use with [laminas-mvc](https://docs.laminas.dev/laminas-mvc) applications.
 
 ## Installation
 
 1. Install the module via composer by running:
 
    ```bash
-   $ composer require --dev zendframework/zend-developer-tools
+   $ composer require --dev laminas/laminas-developer-tools
    ```
 
    or download it directly from github and place it in your application's `module/` directory.
 
-2. Add the `ZendDeveloperTools` module to the module section of your `config/application.config.php`.
-   Starting with version 1.1.0, if you are using [zend-component-installer](https://docs.zendframework.com/zend-component-installer),
+2. Add the `Laminas\\DeveloperTools` module to the module section of your `config/application.config.php`.
+   Starting with version 1.1.0, if you are using [laminas-component-installer](https://docs.laminas.dev/laminas-component-installer),
    this will be done for you automatically.
 
-3. Copy `./vendor/zendframework/zend-developer-tools/config/zenddevelopertools.local.php.dist` to
-   `./config/autoload/zenddevelopertools.local.php`. Change any settings in it
+3. Copy `./vendor/laminas/laminas-developer-tools/config/laminas-developer-tools.local.php.dist` to
+   `./config/autoload/laminas-developer-tools.local.php`. Change any settings in it
    according to your needs.
 
 ## Extensions
 
-- [BjyProfiler](https://github.com/bjyoungblood/BjyProfiler) - profile `Zend\Db` queries
+- [BjyProfiler](https://github.com/bjyoungblood/BjyProfiler) - profile `Laminas\Db` queries
 - [OcraServiceManager](https://github.com/Ocramius/OcraServiceManager) - track dependencies within your application
-- [SanSessionToolbar](https://github.com/samsonasik/SanSessionToolbar) - preview `Zend\Session` data
-- [ZfSnapEventDebugger](https://github.com/snapshotpl/ZfSnapEventDebugger) - debug events from `Zend\EventManager`
+- [SanSessionToolbar](https://github.com/samsonasik/SanSessionToolbar) - preview `Laminas\Session` data
+- [ZfSnapEventDebugger](https://github.com/snapshotpl/ZfSnapEventDebugger) - debug events from `Laminas\EventManager`
 - [DoctrineORMModule](https://github.com/doctrine/DoctrineORMModule) - profile `DoctrineORM` queries
-- [JhuZdtLoggerModule](https://github.com/jhuet/JhuZdtLoggerModule) - log data from `Zend\Log`
-- [aist-git-tools](https://github.com/ma-si/aist-git-tools) - informations about current GIT repository
+- [JhuZdtLoggerModule](https://github.com/jhuet/JhuZdtLoggerModule) - log data from `Laminas\Log`
+- [aist-git-tools](https://github.com/ma-si/aist-git-tools) - information about current GIT repository

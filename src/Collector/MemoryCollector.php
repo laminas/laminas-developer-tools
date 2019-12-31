@@ -1,14 +1,15 @@
 <?php
-/**
- * @see       https://github.com/zendframework/ZendDeveloperTools for the canonical source repository
- * @copyright Copyright (c) 2011-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/ZendDeveloperTools/blob/master/LICENSE.md New BSD License
- */
-namespace ZendDeveloperTools\Collector;
 
-use ZendDeveloperTools\EventLogging\EventContextProvider;
-use Zend\EventManager\Event;
-use Zend\Mvc\MvcEvent;
+/**
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
+ */
+namespace Laminas\DeveloperTools\Collector;
+
+use Laminas\DeveloperTools\EventLogging\EventContextProvider;
+use Laminas\EventManager\Event;
+use Laminas\Mvc\MvcEvent;
 
 /**
  * Memory Data Collector.
