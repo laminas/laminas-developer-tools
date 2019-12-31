@@ -1,57 +1,21 @@
 {
-    "name": "zendframework/zend-developer-tools",
-    "description": "Module for developer and debug tools for working with the ZF2 MVC layer.",
-    "type": "zf-module",
     "license": "BSD-3-Clause",
-    "keywords": [
-        "debug",
-        "developer",
-        "zf2",
-        "module"
-    ],
-    "homepage": "https://github.com/zendframework/ZendDeveloperTools",
-    "authors": [
-        {
-            "name": "Evan Coury",
-            "email": "me@evancoury.com",
-            "homepage": "http://blog.evan.pro/"
-        },
-        {
-            "name": "Eric Boh",
-            "email": "cossish@gmail.com"
-        }
-    ],
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-developer-tools/",
+        "issues": "https://github.com/laminas/laminas-developer-tools/issues",
+        "source": "https://github.com/laminas/laminas-developer-tools",
+        "rss": "https://github.com/laminas/laminas-developer-tools/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "require": {
-        "php":                               ">=5.3.3",
-        "zendframework/zend-mvc":            "2.*",
-        "zendframework/zend-eventmanager":   "2.*",
-        "zendframework/zend-stdlib":         "2.*",
-        "zendframework/zend-servicemanager": "2.*",
-        "zendframework/zend-modulemanager":  "2.*",
-        "zendframework/zend-version":        "2.*",
-        "zendframework/zend-debug":          "2.*",
-        "zendframework/zend-view":           "2.*"
+        "laminas/laminas-zendframework-bridge": "^1.0"
     },
-    "require-dev": {
-      "phpunit/phpunit":                     "~4"
-    },
-    "suggest": {
-        "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
-        "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application.",
-        "san/san-session-toolbar": "SanSessionToolbar can help you see current Zend\\Session data you're using within your application.",
-        "snapshotpl/zf-snap-event-debugger": "ZfSnapEventDebugger can help you debug events from Zend\\EventManager",
-        "doctrine/doctrine-orm-module": "Profile DoctrineORM queries",
-        "jhuet/zdt-logger-module": "Show you log data from Zend\\Log",
-        "aist/aist-git-tools": "Show you informations about current GIT repository"
-    },
-    "autoload": {
-        "psr-0": {
-            "ZendDeveloperTools": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-0": {
-            "ZendDeveloperToolsTest": "tests/"
-        }
+    "replace": {
+        "zendframework/zend-developer-tools": "self.version"
     }
 }
