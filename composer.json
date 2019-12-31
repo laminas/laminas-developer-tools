@@ -1,53 +1,21 @@
 {
-    "name": "zendframework/zend-developer-tools",
-    "description": "Module for developer and debug tools for use with zend-mvc applications.",
+    "name": "laminas/laminas-developer-tools",
+    "description": "Module for developer and debug tools for use with laminas-mvc applications.",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zendframework",
+        "laminas",
         "debug",
         "developer",
-        "zf",
         "module"
     ],
+    "homepage": "https://laminas.dev",
     "support": {
-        "issues": "https://github.com/zendframework/zend-developer-tools/issues",
-        "source": "https://github.com/zendframework/zend-developer-tools",
-        "rss": "https://github.com/zendframework/zend-developer-tools/releases.atom",
-        "chat": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/components"
-    },
-    "require": {
-        "php": "^5.6 || ^7.0",
-        "symfony/var-dumper": "^3.4.36 || ^4.4.1 || ^5.0.1",
-        "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-        "zendframework/zend-modulemanager": "^2.7",
-        "zendframework/zend-mvc": "^2.7 || ^3.0.1",
-        "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0",
-        "zendframework/zend-view": "^2.6"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.25 || ^6.4.4 || ^7.1",
-        "zendframework/zend-coding-standard": "~1.0.0"
-    },
-    "suggest": {
-        "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
-        "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application.",
-        "san/san-session-toolbar": "SanSessionToolbar can help you see current Zend\\Session data you're using within your application.",
-        "snapshotpl/zf-snap-event-debugger": "ZfSnapEventDebugger can help you debug events from Zend\\EventManager",
-        "doctrine/doctrine-orm-module": "Profile DoctrineORM queries",
-        "jhuet/zdt-logger-module": "Show you log data from Zend\\Log",
-        "aist/aist-git-tools": "Show you informations about current GIT repository"
-    },
-    "autoload": {
-        "psr-4": {
-            "ZendDeveloperTools\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendDeveloperToolsTest\\": "test/"
-        }
+        "docs": "https://docs.laminas.dev/laminas-developer-tools/",
+        "issues": "https://github.com/laminas/laminas-developer-tools/issues",
+        "source": "https://github.com/laminas/laminas-developer-tools",
+        "rss": "https://github.com/laminas/laminas-developer-tools/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -57,8 +25,42 @@
             "dev-master": "1.3.x-dev",
             "dev-develop": "2.0.x-dev"
         },
-        "zf": {
-            "module": "ZendDeveloperTools"
+        "laminas": {
+            "module": "Laminas\\DeveloperTools"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
+        "laminas/laminas-modulemanager": "^2.7",
+        "laminas/laminas-mvc": "^2.7 || ^3.0.1",
+        "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "laminas/laminas-view": "^2.6",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "symfony/var-dumper": "^3.4.36 || ^4.4.1 || ^5.0.1"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "phpunit/phpunit": "^5.7.25 || ^6.4.4 || ^7.1"
+    },
+    "suggest": {
+        "aist/aist-git-tools": "Show you information about current GIT repository",
+        "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Laminas) Db collector.",
+        "doctrine/doctrine-orm-module": "Profile DoctrineORM queries",
+        "jhuet/zdt-logger-module": "Show you log data from Laminas\\Log",
+        "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application.",
+        "san/san-session-toolbar": "SanSessionToolbar can help you see current Laminas\\Session data you're using within your application.",
+        "snapshotpl/api-tools-snap-event-debugger": "ZfSnapEventDebugger can help you debug events from Laminas\\EventManager"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\DeveloperTools\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\DeveloperTools\\": "test/"
         }
     },
     "scripts": {
@@ -71,15 +73,7 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "authors": [
-        {
-            "name": "Evan Coury",
-            "email": "me@evancoury.com",
-            "homepage": "http://blog.evan.pro/"
-        },
-        {
-            "name": "Eric Boh",
-            "email": "cossish@gmail.com"
-        }
-    ]
+    "replace": {
+        "zendframework/zend-developer-tools": "self.version"
+    }
 }
