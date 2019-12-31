@@ -1,22 +1,23 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-developer-tools for the canonical source repository
- * @copyright Copyright (c) 2011-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-developer-tools/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendDeveloperTools\Listener;
+namespace Laminas\DeveloperTools\Listener;
 
-use ZendDeveloperTools\Collector\AutoHideInterface;
-use ZendDeveloperTools\Exception\InvalidOptionException;
-use ZendDeveloperTools\Options;
-use ZendDeveloperTools\Profiler;
-use ZendDeveloperTools\ProfilerEvent;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use Zend\View\Exception\RuntimeException;
-use Zend\View\Model\ViewModel;
+use Laminas\DeveloperTools\Collector\AutoHideInterface;
+use Laminas\DeveloperTools\Exception\InvalidOptionException;
+use Laminas\DeveloperTools\Options;
+use Laminas\DeveloperTools\Profiler;
+use Laminas\DeveloperTools\ProfilerEvent;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\View\Exception\RuntimeException;
+use Laminas\View\Model\ViewModel;
 
 /**
  * Developer Toolbar Listener
@@ -37,7 +38,7 @@ class ToolbarListener implements ListenerAggregateInterface
      *
      * @var string
      */
-    const DOC_URI = 'https://docs.zendframework.com/';
+    const DOC_URI = 'https://docs.laminas.dev/';
 
     /**
      * @var object
@@ -114,17 +115,17 @@ class ToolbarListener implements ListenerAggregateInterface
         $response    = $event->getApplication()->getResponse();
 
         $toolbarView = new ViewModel(['entries' => $entries]);
-        $toolbarView->setTemplate('zend-developer-tools/toolbar/toolbar');
+        $toolbarView->setTemplate('laminas-developer-tools/toolbar/toolbar');
         $toolbar     = $this->renderer->render($toolbarView);
 
         $toolbarCss  = new ViewModel([
             'position' => $this->options->getToolbarPosition(),
         ]);
-        $toolbarCss->setTemplate('zend-developer-tools/toolbar/style');
+        $toolbarCss->setTemplate('laminas-developer-tools/toolbar/style');
         $style       = $this->renderer->render($toolbarCss);
 
         $toolbarJs   = new ViewModel();
-        $toolbarJs->setTemplate('zend-developer-tools/toolbar/script');
+        $toolbarJs->setTemplate('laminas-developer-tools/toolbar/script');
         $script      = $this->renderer->render($toolbarJs);
 
         $toolbar  = str_replace('$', '\$', $toolbar);
@@ -150,15 +151,15 @@ class ToolbarListener implements ListenerAggregateInterface
     {
         $entries = [];
         $report  = $event->getReport();
-        $zfEntry = new ViewModel([
+        $laminasEntry = new ViewModel([
             'php_version' => phpversion(),
             'has_intl'    => extension_loaded('intl'),
             'doc_uri'     => self::DOC_URI,
             'modules'     => $this->getModules($event),
         ]);
-        $zfEntry->setTemplate('zend-developer-tools/toolbar/zendframework');
+        $laminasEntry->setTemplate('laminas-developer-tools/toolbar/laminas');
 
-        $entries[]  = $this->renderer->render($zfEntry);
+        $entries[]  = $this->renderer->render($laminasEntry);
         $errors     = [];
         $collectors = $this->options->getCollectors();
         $templates  = $this->options->getToolbarEntries();
@@ -202,7 +203,7 @@ class ToolbarListener implements ListenerAggregateInterface
 
         if ($report->hasErrors()) {
             $errorTpl  = new ViewModel(['errors' => $report->getErrors()]);
-            $errorTpl->setTemplate('zend-developer-tools/toolbar/error');
+            $errorTpl->setTemplate('laminas-developer-tools/toolbar/error');
             $entries[] = $this->renderer->render($errorTpl);
         }
 
@@ -211,7 +212,7 @@ class ToolbarListener implements ListenerAggregateInterface
 
     /**
      * Wrapper for Zend\Version::getLatest with caching functionality, so that
-     * ZendDeveloperTools won't act as a "DDoS bot-network".
+     * LaminasDeveloperTools won't act as a "DDoS bot-network".
      *
      * @param  string $currentVersion
      * @return array
@@ -230,8 +231,8 @@ class ToolbarListener implements ListenerAggregateInterface
             return [true, ''];
         }
 
-        if (file_exists($cacheDir . '/ZDT_ZF_Version.cache')) {
-            $cache = file_get_contents($cacheDir . '/ZDT_ZF_Version.cache');
+        if (file_exists($cacheDir . '/Laminas_Developer_Tool_Version.cache')) {
+            $cache = file_get_contents($cacheDir . '/Laminas_Developer_Tool_Version.cache');
             $cache = explode('|', $cache);
 
             if ($cache[0] + self::VERSION_CACHE_TTL > time()) {
@@ -251,7 +252,7 @@ class ToolbarListener implements ListenerAggregateInterface
         $latest   = Version::getLatest();
 
         file_put_contents(
-            $cacheDir . '/ZDT_ZF_Version.cache',
+            $cacheDir . '/Laminas_Developer_Tool_Version.cache',
             sprintf(
                 '%d|%s|%s',
                 time(),
