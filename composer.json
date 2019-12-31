@@ -1,43 +1,47 @@
 {
-    "name": "zendframework/zend-developer-tools",
-    "description": "Module for developer and debug tools for working with the ZF2 MVC layer.",
-    "type": "zf-module",
+    "name": "laminas/laminas-developer-tools",
+    "description": "Module for developer and debug tools for working with the Laminas MVC layer.",
+    "type": "api-tools-module",
     "license": "BSD-3-Clause",
     "keywords": [
+        "laminas",
         "debug",
         "developer",
-        "zf2",
         "module"
     ],
-    "homepage": "https://github.com/zendframework/ZendDeveloperTools",
-    "authors": [
-        {
-            "name": "Evan Coury",
-            "email": "me@evancoury.com",
-            "homepage": "http://blog.evan.pro/"
-        },
-        {
-            "name": "Eric Boh",
-            "email": "cossish@gmail.com"
-        }
-    ],
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-developer-tools/",
+        "issues": "https://github.com/laminas/laminas-developer-tools/issues",
+        "source": "https://github.com/laminas/laminas-developer-tools",
+        "rss": "https://github.com/laminas/laminas-developer-tools/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "require": {
-        "php":                               ">=5.3.3",
-        "zendframework/zend-mvc":            "2.*",
-        "zendframework/zend-eventmanager":   "2.*",
-        "zendframework/zend-stdlib":         "2.*",
-        "zendframework/zend-servicemanager": "2.*",
-        "zendframework/zend-version":        "2.*"
+        "php": ">=5.3.3",
+        "laminas/laminas-eventmanager": "2.*",
+        "laminas/laminas-mvc": "2.*",
+        "laminas/laminas-servicemanager": "2.*",
+        "laminas/laminas-stdlib": "2.*",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "zendframework/zend-version": "2.*"
     },
     "suggest": {
-        "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector."
+        "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Laminas) Db collector."
     },
     "autoload": {
         "psr-0": {
-            "ZendDeveloperTools": "src/"
+            "Laminas\\DeveloperTools\\": "src/"
         },
         "classmap": [
             "./Module.php"
         ]
+    },
+    "replace": {
+        "zendframework/zend-developer-tools": "self.version"
     }
 }
