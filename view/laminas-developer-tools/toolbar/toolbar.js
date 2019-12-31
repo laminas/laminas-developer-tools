@@ -9,17 +9,17 @@
         /** @type {Toolbar} */
         var self = this;
         /** @type {HTMLElement} */
-        var container = document.getElementById("zend-developer-toolbar");
+        var container = document.getElementById("laminas-developer-toolbar");
         /** @type {number} */
         var width = container.offsetWidth;
         /** @type {number} */
         var windowWidthDifference = window.innerWidth - width;
         /** @type {HTMLElement} */
-        var toggleTrigger = document.getElementById("zdf-toolbar-toggle");
+        var toggleTrigger = document.getElementById("laminas-toolbar-toggle");
         /** @type {boolean} */
         var hidden;
         /** @type {string} */
-        var cookieKeyHidden = "zdt-hidden";
+        var cookieKeyHidden = "laminas-hidden";
         /** @type {number} */
         var widthHiddenState = 25;
         

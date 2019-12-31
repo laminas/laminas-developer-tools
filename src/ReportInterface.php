@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-developer-tools for the canonical source repository
- * @copyright Copyright (c) 2011-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-developer-tools/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendDeveloperTools;
+namespace Laminas\DeveloperTools;
 
 interface ReportInterface
 {
