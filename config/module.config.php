@@ -2,7 +2,7 @@
 return array(
     'view_manager' => array(
         'template_path_stack' => array(
-            'zenddevelopertools' => __DIR__ . '/../view',
+            'laminas-developer-tools' => __DIR__ . '/../view',
         ),
     ),
 );
