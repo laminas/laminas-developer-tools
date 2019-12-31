@@ -1,16 +1,15 @@
 <?php
-/**
- * Zend Developer Tools for Zend Framework (http://framework.zend.com/)
- *
- * @link       http://github.com/zendframework/ZendDeveloperTools for the canonical source repository
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd New BSD License
- */
-namespace ZendDeveloperTools\Collector;
 
-use Zend\Mvc\MvcEvent;
-use Zend\EventManager\Event;
-use ZendDeveloperTools\EventLogging\EventContextProvider;
+/**
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
+ */
+namespace Laminas\DeveloperTools\Collector;
+
+use Laminas\DeveloperTools\EventLogging\EventContextProvider;
+use Laminas\EventManager\Event;
+use Laminas\Mvc\MvcEvent;
 
 /**
  * Time Data Collector.

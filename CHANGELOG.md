@@ -6,8 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#213](https://github.com/zendframework/ZendDeveloperTools/pull/213) adds
-  support for zend-mvc, zend-eventmanager, and zend-servicemanager v3.
+- [zendframework/zend-developer-tools#213](https://github.com/zendframework/ZendDeveloperTools/pull/213) adds
+  support for laminas-mvc, laminas-eventmanager, and laminas-servicemanager v3.
 
 ### Deprecated
 

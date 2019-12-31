@@ -1,7 +1,7 @@
 <?php
-namespace ZendDeveloperToolsTest\Collector;
+namespace LaminasTest\DeveloperTools\Collector;
 
-use ZendDeveloperTools\Collector\ConfigCollector;
+use Laminas\DeveloperTools\Collector\ConfigCollector;
 
 class ConfigCollectorTest extends \PHPUnit_Framework_TestCase
 {
@@ -9,10 +9,10 @@ class ConfigCollectorTest extends \PHPUnit_Framework_TestCase
     {
         $collector = new ConfigCollector();
 
-        $application = $this->getMockBuilder("Zend\Mvc\Application")
+        $application = $this->getMockBuilder("Laminas\Mvc\Application")
             ->disableOriginalConstructor()
             ->getMock();
-        $serviceManager = $this->getMockBuilder("Zend\ServiceManager\ServiceManager")
+        $serviceManager = $this->getMockBuilder("Laminas\ServiceManager\ServiceManager")
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -20,7 +20,7 @@ class ConfigCollectorTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method("getServiceManager")
             ->willReturn($serviceManager);
-        $mvcEvent = $this->getMockBuilder("Zend\Mvc\MvcEvent")
+        $mvcEvent = $this->getMockBuilder("Laminas\Mvc\MvcEvent")
             ->getMock();
 
         $mvcEvent->method("getApplication")->willReturn($application);

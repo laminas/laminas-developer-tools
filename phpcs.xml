@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Zend Framework coding standard">
-    <description>Zend Framework coding standard</description>
+<ruleset name="Laminas coding standard">
+    <description>Laminas coding standard</description>
 
     <!-- display progress -->
     <arg value="p"/>
@@ -19,5 +19,5 @@
     <file>src</file>
     <file>test</file>
     <file>config/module.config.php</file>
-    <file>config/zenddevelopertools.local.php.dist</file>
+    <file>config/laminas-developer-tools.local.php.dist</file>
 </ruleset>

@@ -1,66 +1,66 @@
 {
-    "name": "zendframework/zend-developer-tools",
-    "description": "Module for developer and debug tools for use with zend-mvc applications.",
-    "type": "library",
+    "name": "laminas/laminas-developer-tools",
+    "description": "Module for developer and debug tools for use with laminas-mvc applications.",
     "license": "BSD-3-Clause",
     "keywords": [
+        "laminas",
         "debug",
         "developer",
-        "zf2",
         "module"
     ],
-    "homepage": "https://github.com/zendframework/ZendDeveloperTools",
-    "authors": [
-        {
-            "name": "Evan Coury",
-            "email": "me@evancoury.com",
-            "homepage": "http://blog.evan.pro/"
-        },
-        {
-            "name": "Eric Boh",
-            "email": "cossish@gmail.com"
-        }
-    ],
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-developer-tools/",
+        "issues": "https://github.com/laminas/laminas-developer-tools/issues",
+        "source": "https://github.com/laminas/laminas-developer-tools",
+        "rss": "https://github.com/laminas/laminas-developer-tools/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.1-dev",
             "dev-develop": "1.2-dev"
         },
-        "zf": {
-            "module": "ZendDeveloperTools"
+        "laminas": {
+            "module": "Laminas\\DeveloperTools"
         }
     },
     "require": {
         "php": "^5.6 || ^7.0",
-        "zendframework/zend-mvc": "^2.7 || ^3.0.1",
-        "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0",
-        "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
-        "zendframework/zend-modulemanager": "^2.7",
-        "zendframework/zend-debug": "^2.5 || ^3.0",
-        "zendframework/zend-view": "^2.6"
+        "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
+        "laminas/laminas-modulemanager": "^2.7",
+        "laminas/laminas-mvc": "^2.7 || ^3.0.1",
+        "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "laminas/laminas-view": "^2.6",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "zendframework/zend-debug": "^2.5 || ^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8 || ^5.0",
         "squizlabs/php_codesniffer": "~2.3.1"
     },
     "suggest": {
-        "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
-        "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application.",
-        "san/san-session-toolbar": "SanSessionToolbar can help you see current Zend\\Session data you're using within your application.",
-        "snapshotpl/zf-snap-event-debugger": "ZfSnapEventDebugger can help you debug events from Zend\\EventManager",
+        "aist/aist-git-tools": "Show you information about current GIT repository",
+        "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Laminas) Db collector.",
         "doctrine/doctrine-orm-module": "Profile DoctrineORM queries",
-        "jhuet/zdt-logger-module": "Show you log data from Zend\\Log",
-        "aist/aist-git-tools": "Show you informations about current GIT repository"
+        "jhuet/zdt-logger-module": "Show you log data from Laminas\\Log",
+        "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application.",
+        "san/san-session-toolbar": "SanSessionToolbar can help you see current Laminas\\Session data you're using within your application.",
+        "snapshotpl/api-tools-snap-event-debugger": "ZfSnapEventDebugger can help you debug events from Laminas\\EventManager"
     },
     "autoload": {
         "psr-4": {
-            "ZendDeveloperTools\\": "src/"
+            "Laminas\\DeveloperTools\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ZendDeveloperToolsTest\\": "test/"
+            "LaminasTest\\DeveloperTools\\": "test/"
         }
     },
     "scripts": {
@@ -73,5 +73,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit",
         "test-coverage": "phpunit --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-developer-tools": "self.version"
     }
 }

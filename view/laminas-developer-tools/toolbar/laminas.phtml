@@ -1,0 +1,30 @@
+<div class="laminas-toolbar-entry">
+    <div class="laminas-toolbar-preview">
+        <img alt="Laminas" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAAeCAYAAACPOlitAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAQ/SURBVGiB7ZhbqFVVFIa/oXk5CpZ5iB4UtVRSK81Cu2h6cmuRlwgJDDTp9lDgkwgFUQ8FRYGFBSEY6ItISUYPRZiamoZohgWKBWZKEWFGhJdE/XpYS5su1zl7n80+bpHzw36Y//7nnP8ca6wxx97QjW50oxtXCNQ+ap9m+wBQH1I3qS3N9HFNYfxWzj3fBC9FnAZOAOeaaaIYoH4lXFMQEZuATc320aOeSWpvdah6i9qrinZCLa+JOlC9NRn3UG8s7pt8d6d6m1r6QNVe6hB1TEdlQ21V71BHqB3HQ12prqqiWa0e93+cUl9Vo0Tbop5QZ3W4caZ9Td2RjNvyuZFwG9SX1R+S/fer4wtrLVP/TjRn1HfTYKr91HXq2UR3RJ2brlVPBn0BzAEGA0OBl4AXgUUl2slAH2BnYqxHO090JrA9GbfknxQD8v1WAP2BEcBRYH0hS7cBj+X+BpPV1GeAJYnmdWAiMAW4Drg5546VH5vaMqideWvVD0v4N9VdBe5pdXeBG5g/5QcT7uH8qaYZtFNdV5g7Mte1VfH4jro1GW9T11Q7W701qCV//0flNegQcH2JtAJsKHCzgR8L3HTgLPB1Ddt/mw4i4ifgH+Dagsfe6lh1dJ6xhwse1wDz1VXq7e1t1ukAqUuB34FdwD7gN7IDFnWtwDjgy4TrCUxNuRwVYHtEHK/BwulqnPos8CvwHbAX+AOYl2oi4v2cmwjsNeu5phUX7lSA1AVkNeBxsvrQl+z9HlUirwD/At8k3ERgIJde32WZVhfUmcByYHHury8wn6xeXYSIWA+MBdqAk8BmdXGq6WwGzQU+jYjPIsKIOBMRHwGflGgrwNaIOFngDkTEoeRAw8gKZDGr6sUcYFtErI2Ic/nnc2B1mTg/x1cRMQtYCSxNv+9sgI4C49W+5wl1CPBAiXY6lx56Rgk3E/gL2NNJLx15HK1eqEnqIOCiVkN9Uh1XmNsfOJUSxSbrFFnh2s2lWAO8ATwK7FO3kF2P04BfCpuPAoZxcf3pD0wClhXWrQAbI+JsgTf/VOOK/HvAAmC/uoHs18F04CDZ63Yes4EP1J1kl8YYYALwRLpwMUDLgSMlBgB2R8RhdTRZzzMyX3gJMAgYnmgrZE/y+4SbBvQEtlw4Vda5tpHVtSJ2AAsjIg3IK8CBEu1zZL0PEfFn3jguJKsvB/N5AvecnxAR89QpwCPADWT93aKI2NfO+RsH9eNij5F3ytsL3F15D3NTl5u6UqD2VI+pTxX4VnV4gXtB/fnyOmwy1LvzrBhWg3ajuuIy2KobdXXSVTCDwlVehvwmvJfGXe9dgq4IUIXaDn0/0BvY3AUeGoaGBii5ymsJUAXYExFHG+mh0Wh0Bk0lax22VBNS3jRe3VDfNvnTqwNda/5HVVkHfkWh0Rk0mdqyYjJZ1141mFcV1En5755qugHqfZfDUze60Vz8B9ILnHkT27skAAAAAElFTkSuQmCC">
+        <div class="laminas-toolbar-detail">
+            <span class="laminas-toolbar-info">
+                <a href="<?php echo $doc_uri ?>">Documentation</a>
+            </span>
+            <span class="laminas-toolbar-info laminas-toolbar-spacing">
+                <a href="https://packagist.org/?tags=module~zf2~zendframework~zend%20framework~zend%20framework%202~zf3~zf~zend~laminas">Modules Gallery</a>
+            </span>
+            <span class="laminas-toolbar-info">
+                <span class="laminas-detail-label">PHP Version</span>
+                <span class="laminas-detail-value"><?php echo $this->php_version; ?></span>
+            </span>
+            <span class="laminas-toolbar-info">
+                <span class="laminas-detail-label">Extensions</span>
+                <span class="laminas-detail-value">
+                    <span class="laminas-toolbar-status laminas-toolbar-status-<?php echo ($this->has_intl) ? 'green' : 'red'; ?>"
+                          title="<?php echo $intlText = 'intl extension ' . ($this->has_intl ? 'enabled' : 'disabled'); ?>"
+                    >intl</span>
+                </span>
+            </span>
+            <?php if (isset($this->modules)) : ?>
+                <span class="laminas-toolbar-info">
+                    <?php echo $this->LaminasDeveloperToolsDetailArray('Modules', $this->modules); ?>
+                </span>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

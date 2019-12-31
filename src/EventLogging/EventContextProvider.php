@@ -1,13 +1,14 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/ZendDeveloperTools for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-developer-tools for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-developer-tools/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-developer-tools/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendDeveloperTools\EventLogging;
+namespace Laminas\DeveloperTools\EventLogging;
 
-use Zend\EventManager\EventInterface;
+use Laminas\EventManager\EventInterface;
 
 /**
  * Class to provide context information for a passed event.
@@ -39,7 +40,7 @@ class EventContextProvider implements EventContextInterface
     }
 
     /**
-     * @see \ZendDeveloperTools\EventLogging\EventContextInterface::setEvent()
+     * @see \Laminas\DeveloperTools\EventLogging\EventContextInterface::setEvent()
      * @param  Event $event The event to add context to.
      * @return null
      */
@@ -49,7 +50,7 @@ class EventContextProvider implements EventContextInterface
     }
 
     /**
-     * @see \ZendDeveloperTools\EventLogging\EventContextInterface::getEvent()
+     * @see \Laminas\DeveloperTools\EventLogging\EventContextInterface::getEvent()
      * @return Event
      */
     public function getEvent()
