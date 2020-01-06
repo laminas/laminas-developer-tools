@@ -1,6 +1,6 @@
 # Laminas Developer Tools
 
-[![Build Status](https://travis-ci.org/laminas/laminas-developer-tools.svg?branch=master)](https://travis-ci.org/laminas/laminas-developer-tools)
+[![Build Status](https://travis-ci.com/laminas/laminas-developer-tools.svg?branch=master)](https://travis-ci.com/laminas/laminas-developer-tools)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-developer-tools/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-developer-tools?branch=master)
 
 Module providing debug tools for use with [laminas-mvc](https://docs.laminas.dev/laminas-mvc) applications.
