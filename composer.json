@@ -10,7 +10,6 @@
     ],
     "homepage": "https://laminas.dev",
     "support": {
-        "docs": "https://docs.laminas.dev/laminas-developer-tools/",
         "issues": "https://github.com/laminas/laminas-developer-tools/issues",
         "source": "https://github.com/laminas/laminas-developer-tools",
         "rss": "https://github.com/laminas/laminas-developer-tools/releases.atom",
