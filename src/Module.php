@@ -166,11 +166,12 @@ class Module implements
                 'ZendDeveloperTools\StorageListener' => 'Laminas\DeveloperTools\StorageListener',
                 \ZendDeveloperTools\Listener\ToolbarListener::class => Listener\ToolbarListener::class,
                 \ZendDeveloperTools\Listener\ProfilerListener::class => Listener\ProfilerListener::class,
-                \ZendDeveloperTools\Listener\EventLoggingListenerAggregate::class => Listener\EventLoggingListenerAggregate::class,
+                \ZendDeveloperTools\Listener\EventLoggingListenerAggregate::class
+                    => Listener\EventLoggingListenerAggregate::class,
                 'ZendDeveloperTools\DbCollector' => 'Laminas\DeveloperTools\DbCollector',
             ],
             'invokables' => [
-                Report::class                           => Report::class,
+                Report::class                               => Report::class,
                 'Laminas\DeveloperTools\ExceptionCollector' => Collector\ExceptionCollector::class,
                 'Laminas\DeveloperTools\RequestCollector'   => Collector\RequestCollector::class,
                 'Laminas\DeveloperTools\ConfigCollector'    => Collector\ConfigCollector::class,
