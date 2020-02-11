@@ -171,7 +171,7 @@ class Module implements
                 'ZendDeveloperTools\DbCollector' => 'Laminas\DeveloperTools\DbCollector',
             ],
             'invokables' => [
-                Report::class                           => Report::class,
+                Report::class                               => Report::class,
                 'Laminas\DeveloperTools\ExceptionCollector' => Collector\ExceptionCollector::class,
                 'Laminas\DeveloperTools\RequestCollector'   => Collector\RequestCollector::class,
                 'Laminas\DeveloperTools\ConfigCollector'    => Collector\ConfigCollector::class,
