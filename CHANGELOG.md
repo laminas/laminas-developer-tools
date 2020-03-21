@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.0.1 - TBD
+## 2.0.1 - 2020-03-21
 
 ### Added
 
@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#28](https://github.com/laminas/laminas-developer-tools/pull/28) fixes console errors after switching to `symfony/var-dumper`.
 
 ## 2.0.0 - 2019-12-26
 
@@ -49,6 +49,28 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - Nothing.
+
+## 1.3.1 - 2020-03-21
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#28](https://github.com/laminas/laminas-developer-tools/pull/28) fixes console errors after switching to `symfony/var-dumper`.
 
 ## 1.3.0 - 2019-12-26
 
