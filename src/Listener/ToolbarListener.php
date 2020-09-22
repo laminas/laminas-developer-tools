@@ -135,7 +135,7 @@ class ToolbarListener implements ListenerAggregateInterface
             $response->getBody(),
             1
         );
-        $injected = preg_replace('/<\/head>/i', $style . "\n</head>", $injected, 1);
+        $injected = preg_replace('/<\/body>/i', $style . "\n</body>", $injected, 1);
 
         $response->setContent($injected);
     }
