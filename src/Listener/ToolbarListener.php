@@ -131,6 +131,8 @@ class ToolbarListener implements ListenerAggregateInterface
         $toolbar  = str_replace(['$', '\\\\'], ['\$', '\\\\\\'], $toolbar);
 
         $content = $response->getBody();
+        $isHTML5 = stripos($content, '<!doctype html>') === 0;
+
         if (preg_match('/<\/body>(?![\s\S]*<\/body>)/i', $content)) {
             $injected = preg_replace(
                 '/<\/body>(?![\s\S]*<\/body>)/i',
@@ -139,13 +141,13 @@ class ToolbarListener implements ListenerAggregateInterface
                 1
             );
 
-            $prepend = stripos($content, '<!doctype html>') === 0
+            $prepend = $isHTML5
                 ? (preg_match('/<\/head>/i', $injected) ? 'head' : 'body')
                 : 'body';
 
             $injected = preg_replace('/<\/' . $prepend . '>/i', $style . "\n</$prepend>", $injected, 1);
         } else {
-            $injected = stripos($content, '<!doctype html>') === 0
+            $injected = $isHTML5
                 ? (stripos($content, '</html>') !== false
                     ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $content, 1)
                     : '<!doctype html>' . $content . $style. $toolbar . $script)
