@@ -129,14 +129,26 @@ class ToolbarListener implements ListenerAggregateInterface
         $script      = $this->renderer->render($toolbarJs);
 
         $toolbar  = str_replace(['$', '\\\\'], ['\$', '\\\\\\'], $toolbar);
-        $injected = preg_replace(
-            '/<\/body>(?![\s\S]*<\/body>)/i',
-            $toolbar . $script . "\n</body>",
-            $response->getBody(),
-            1
-        );
-        $prepend = preg_match('/<\/head>/i', $injected) ? 'head' : 'body';
-        $injected = preg_replace('/<\/' . $prepend . '>/i', $style . "\n</$prepend>", $injected, 1);
+
+        $body = $response->getBody();
+        if (preg_match('/<\/body>(?![\s\S]*<\/body>)/i', $body)) {
+            $injected = preg_replace(
+                '/<\/body>(?![\s\S]*<\/body>)/i',
+                $toolbar . $script . "\n</body>",
+                $body,
+                1
+            );
+
+            $prepend = stripos($body, '<!doctype html>') === 0
+                ? (preg_match('/<\/head>/i', $injected) ? 'head' : 'body')
+                : 'body';
+
+            $injected = preg_replace('/<\/' . $prepend . '>/i', $style . "\n</$prepend>", $injected, 1);
+        } else {
+            if (stripos($body, '<!doctype html>') === 0) {
+                $injected = preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $body, 1);
+            }
+        }
 
         $response->setContent($injected);
     }
