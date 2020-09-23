@@ -146,7 +146,9 @@ class ToolbarListener implements ListenerAggregateInterface
             $injected = preg_replace('/<\/' . $prepend . '>/i', $style . "\n</$prepend>", $injected, 1);
         } else {
             $injected = stripos($body, '<!doctype html>') === 0
-                ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $body, 1)
+                ? (stripos($body, '</html>') !== false
+                    ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $body, 1)
+                    : '<!doctype html>' . $body . $style. $toolbar . $script)
                 : $body;
         }
 
