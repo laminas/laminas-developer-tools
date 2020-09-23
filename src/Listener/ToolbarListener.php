@@ -130,26 +130,26 @@ class ToolbarListener implements ListenerAggregateInterface
 
         $toolbar  = str_replace(['$', '\\\\'], ['\$', '\\\\\\'], $toolbar);
 
-        $body = $response->getBody();
-        if (preg_match('/<\/body>(?![\s\S]*<\/body>)/i', $body)) {
+        $content = $response->getBody();
+        if (preg_match('/<\/body>(?![\s\S]*<\/body>)/i', $content)) {
             $injected = preg_replace(
                 '/<\/body>(?![\s\S]*<\/body>)/i',
                 $toolbar . $script . "\n</body>",
-                $body,
+                $content,
                 1
             );
 
-            $prepend = stripos($body, '<!doctype html>') === 0
+            $prepend = stripos($content, '<!doctype html>') === 0
                 ? (preg_match('/<\/head>/i', $injected) ? 'head' : 'body')
                 : 'body';
 
             $injected = preg_replace('/<\/' . $prepend . '>/i', $style . "\n</$prepend>", $injected, 1);
         } else {
-            $injected = stripos($body, '<!doctype html>') === 0
-                ? (stripos($body, '</html>') !== false
-                    ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $body, 1)
-                    : '<!doctype html>' . $body . $style. $toolbar . $script)
-                : $body;
+            $injected = stripos($content, '<!doctype html>') === 0
+                ? (stripos($content, '</html>') !== false
+                    ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $content, 1)
+                    : '<!doctype html>' . $content . $style. $toolbar . $script)
+                : $content;
         }
 
         $response->setContent($injected);
