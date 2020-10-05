@@ -17,7 +17,8 @@ class OptionsTest extends TestCase
     public function testStatusOfDefaultConfiguration()
     {
         $dist = require __DIR__ . '/../config/laminas-developer-tools.local.php.dist';
-        $reportMock = $this->prophesize(ReportInterface::class)->reveal();
+        /** @var ReportInterface $reportMock */
+        $reportMock = $this->createMock(ReportInterface::class);
         $options = new Options($dist['laminas-developer-tools'], $reportMock);
         $this->assertTrue($options->isEnabled());
         $this->assertTrue($options->isToolbarEnabled());
@@ -34,9 +35,10 @@ class OptionsTest extends TestCase
      * @dataProvider blacklistFlags
      * @param null|bool $flagValue
      */
-    public function testOnlyWhitelistedToolbarEntriesShouldBeEnabled($flagValue)
+    public function testOnlyWhitelistedToolbarEntriesShouldBeEnabled(?bool $flagValue)
     {
-        $reportMock     = $this->prophesize(ReportInterface::class)->reveal();
+        $reportMock     = $this->createMock(ReportInterface::class);
+        /** @var ReportInterface $reportMock */
         $options        = new Options([], $reportMock);
         $toolbarOptions = [
             'enabled' => true,
