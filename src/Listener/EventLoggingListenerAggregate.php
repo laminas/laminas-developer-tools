@@ -13,6 +13,7 @@ use Laminas\DeveloperTools\Collector\EventCollectorInterface;
 use Laminas\DeveloperTools\Profiler;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\SharedEventManagerInterface;
+use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 
 /**
  * Listens to defined events to allow event-level collection of statistics.
@@ -28,7 +29,7 @@ class EventLoggingListenerAggregate
     protected $collectors;
 
     /**
-     * @var The event identifiers to collect
+     * @var string[] The event identifiers to collect
      */
     protected $identifiers;
 

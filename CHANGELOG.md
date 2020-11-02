@@ -2,27 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.1.0 - TBD
+## 2.0.3 - 2020-11-02
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [2.0.3](https://github.com/laminas/laminas-developer-tools/milestone/2)
 
-- Nothing.
+next bug fix release (mini)
 
-### Deprecated
+### 2.0.3
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
 
-### Removed
+#### Bug
 
-- Nothing.
+ - [34: Improve PHPDoc return- and paramter-types](https://github.com/laminas/laminas-developer-tools/pull/34) thanks to @Gounlaf
 
-### Fixed
+#### Enhancement
 
-- Nothing.
+ - [31: Fixes #1 : Toolbar should be displayed even without &lt;head&gt; in HTML5](https://github.com/laminas/laminas-developer-tools/pull/31) thanks to @samsonasik
 
 ## 2.0.2 - 2020-03-29
 

@@ -123,7 +123,7 @@ class Profiler implements EventManagerAwareInterface
     /**
      * Returns the profiler event object.
      *
-     * @return self
+     * @return ProfilerEvent
      */
     public function getEvent()
     {
