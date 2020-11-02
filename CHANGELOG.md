@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - [laminas/laminas-developer-tools#34](https://github.com/laminas/laminas-developer-tools/pull/34) Fix various parameters and returns docblocks.
+- [laminas/laminas-developer-tools#31](https://github.com/laminas/laminas-developer-tools/pull/31) Fixes #1 : Toolbar should be displayed even without `<head>` in HTML5.
 
 ## 2.0.2 - 2020-03-29
 
