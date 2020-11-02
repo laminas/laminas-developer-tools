@@ -23,9 +23,28 @@ use Laminas\ModuleManager\ModuleManager;
 
 class ToolbarListenerTest extends TestCase
 {
-    public function testOnCollected()
+    public function provideHTMLBody()
+    {
+        return [
+            'not HTML5 has head and body' => ['<html><head></head><body></body></html>', true],
+            'not HTML5 has body' => ['<html><body></body></html>', true],
+            'not HTML5 not has body' => ['<html></html>', false],
+            'HTML5 with head' => ['<!doctype html><head></head><body></body>', true],
+            'HTML5 without head' => ['<!doctype html><body></body>', true],
+            'HTML5 without body' => ['<!doctype html>test', true],
+        ];
+    }
+
+    /**
+     * @dataProvider provideHTMLBody
+     */
+    public function testOnCollected($htmlBody, $isInjected)
     {
         $viewRenderer = $this->createMock(PhpRenderer::class);
+        $viewRenderer->expects($this->any())
+                     ->method('render')
+                     ->willReturn('script');
+
         $profilerEvent = $this->createMock(ProfilerEvent::class);
         $application = $this->createMock(Application::class);
         $request = $this->createMock(Request::class);
@@ -33,11 +52,8 @@ class ToolbarListenerTest extends TestCase
                     ->method('getRequest')
                     ->willReturn($request);
 
-        $response = $this->createMock(Response::class);
-        $headers = $this->createMock(Headers::class);
-        $response->expects($this->once())
-                 ->method('getHeaders')
-                 ->willReturn($headers);
+        $response = new Response();
+        $response->setContent($htmlBody);
         $application->expects($this->any())
                     ->method('getResponse')
                     ->willReturn($response);
@@ -73,5 +89,9 @@ class ToolbarListenerTest extends TestCase
 
         $listener = new ToolbarListener($viewRenderer, $option);
         $listener->onCollected($profilerEvent);
+
+        if ($isInjected) {
+            $this->assertRegExp('/script/', $response->getBody());
+        }
     }
 }
