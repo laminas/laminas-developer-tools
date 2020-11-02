@@ -22,6 +22,6 @@ class MemoryCollectorTest extends TestCase
             ->getMock();
 
         $collector->collect($mvcEvent);
-        $this->assertInternalType("integer", $collector->getMemory());
+        $this->assertIsInt($collector->getMemory());
     }
 }

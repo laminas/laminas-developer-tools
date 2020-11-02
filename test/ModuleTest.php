@@ -18,7 +18,7 @@ class ModuleTest extends TestCase
         $module = new Module();
         $config = $module->getConfig();
 
-        $this->assertInternalType('array', $config);
+        $this->assertIsArray($config);
     }
 
     public function testConfigSerialization()
