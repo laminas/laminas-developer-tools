@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 
 class ToolbarListenerTest extends TestCase
 {
-    public function provideHTMLBody()
+    public function provideHTMLBodyWithInjectedFlag()
     {
         return [
             'not HTML5 has head and body' => ['<html><head></head><body></body></html>', true],
@@ -35,9 +35,9 @@ class ToolbarListenerTest extends TestCase
     }
 
     /**
-     * @dataProvider provideHTMLBody
+     * @dataProvider provideHTMLBodyWithInjectedFlag
      */
-    public function testOnCollected($htmlBody, $isInjected)
+    public function testOnCollected($htmlBody, $injected)
     {
         $viewRenderer = $this->createMock(PhpRenderer::class);
         $viewRenderer->expects($this->any())
@@ -89,7 +89,7 @@ class ToolbarListenerTest extends TestCase
         $listener = new ToolbarListener($viewRenderer, $option);
         $listener->onCollected($profilerEvent);
 
-        if ($isInjected) {
+        if ($injected) {
             $this->assertRegExp('/script/', $response->getBody());
         }
     }
