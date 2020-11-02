@@ -21,7 +21,7 @@ class Report implements ReportInterface
     protected $uri;
 
     /**
-     * @var integer
+     * @var \DateTime
      */
     protected $time;
 
@@ -175,6 +175,8 @@ class Report implements ReportInterface
         if (isset($this->collectors[$name])) {
             return $this->collectors[$name];
         }
+
+        return null;
     }
 
     /**
@@ -211,6 +213,8 @@ class Report implements ReportInterface
     public function addCollector(Collector\CollectorInterface $collector)
     {
         $this->collectors[$collector->getName()] = $collector;
+
+        return $this;
     }
 
     /**

@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [laminas/laminas-developer-tools#34](https://github.com/laminas/laminas-developer-tools/pull/34) Fix various parameters and returns docblocks.
 
 ## 2.0.2 - 2020-03-29
 

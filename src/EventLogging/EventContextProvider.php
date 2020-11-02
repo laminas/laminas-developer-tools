@@ -30,8 +30,8 @@ class EventContextProvider implements EventContextInterface
     private $debugBacktrace = [];
 
     /**
-     * @param EventInterface $event (Optional) The event to provide context to. The event must be set either here or
-     * with {@see setEvent()} before any other methods can be used.
+     * @param EventInterface|null $event (Optional) The event to provide context to.
+     * The event must be set either here or with {@see setEvent()} before any other methods can be used.
      */
     public function __construct(EventInterface $event = null)
     {
@@ -42,8 +42,8 @@ class EventContextProvider implements EventContextInterface
 
     /**
      * @see \Laminas\DeveloperTools\EventLogging\EventContextInterface::setEvent()
-     * @param  Event $event The event to add context to.
-     * @return null
+     * @param  EventInterface $event The event to add context to.
+     * @return void
      */
     public function setEvent(EventInterface $event)
     {
@@ -52,7 +52,7 @@ class EventContextProvider implements EventContextInterface
 
     /**
      * @see \Laminas\DeveloperTools\EventLogging\EventContextInterface::getEvent()
-     * @return Event
+     * @return EventInterface
      */
     public function getEvent()
     {
@@ -82,7 +82,7 @@ class EventContextProvider implements EventContextInterface
      * Determines a string label to represent an event target.
      *
      * @param mixed $target
-     * @return String
+     * @return string
      */
     private function getEventTargetAsString($target)
     {
@@ -105,7 +105,7 @@ class EventContextProvider implements EventContextInterface
      * Returns the debug_backtrace() for this object with two levels removed so that array starts where this
      * class method was called.
      *
-     * @return string
+     * @return array
      */
     private function getDebugBacktrace()
     {

@@ -49,7 +49,7 @@ class Module implements
     /**
      * loadModulesPost callback
      *
-     * @param  $event
+     * @param EventInterface $event
      */
     public function onLoadModulesPost($event)
     {

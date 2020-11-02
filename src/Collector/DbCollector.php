@@ -99,7 +99,7 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
      * You can use the constants in the Profiler class to specify
      * what kind of queries you want to get, e.g. Profiler::INSERT.
      *
-     * @param  integer $mode
+     * @param  integer|null $mode
      * @return self
      */
     public function getQueryCount($mode = null)
@@ -113,7 +113,7 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
      * You can use the constants in the Profiler class to specify
      * what kind of queries you want to get, e.g. Profiler::INSERT.
      *
-     * @param  integer $mode
+     * @param  integer|null $mode
      * @return float|integer
      */
     public function getQueryTime($mode = null)

@@ -20,14 +20,15 @@ interface EventContextInterface
     /**
      * Sets the event.
      *
-     * @return null
+     * @param EventInterface $event
+     * @return void
      */
     public function setEvent(EventInterface $event);
 
     /**
      * Collector Priority.
      *
-     * @return Event
+     * @return EventInterface
      */
     public function getEvent();
 }
