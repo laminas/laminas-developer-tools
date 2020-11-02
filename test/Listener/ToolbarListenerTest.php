@@ -12,14 +12,13 @@ use Laminas\DeveloperTools\Listener\ToolbarListener;
 use Laminas\DeveloperTools\Options;
 use Laminas\DeveloperTools\ProfilerEvent;
 use Laminas\DeveloperTools\Report;
-use Laminas\View\Renderer\PhpRenderer;
-use PHPUnit\Framework\TestCase;
+use Laminas\Http\PhpEnvironment\Request;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\Application;
 use Laminas\ServiceManager\ServiceManager;
-use Laminas\Http\PhpEnvironment\Response;
-use Laminas\Http\PhpEnvironment\Request;
-use Laminas\Http\Headers;
-use Laminas\ModuleManager\ModuleManager;
+use Laminas\View\Renderer\PhpRenderer;
+use PHPUnit\Framework\TestCase;
 
 class ToolbarListenerTest extends TestCase
 {
