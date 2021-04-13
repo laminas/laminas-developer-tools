@@ -1,7 +1,6 @@
 # Laminas Developer Tools
 
-[![Build Status](https://travis-ci.com/laminas/laminas-developer-tools.svg?branch=master)](https://travis-ci.com/laminas/laminas-developer-tools)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-developer-tools/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-developer-tools?branch=master)
+[![Build Status](https://github.com/laminas/laminas-developer-tools/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-developer-tools/actions?query=workflow%3A"Continuous+Integration")
 
 Module providing debug tools for use with [laminas-mvc](https://docs.laminas.dev/laminas-mvc) applications.
 
