@@ -32,7 +32,7 @@
         "laminas/laminas-mvc": "^3.1",
         "laminas/laminas-servicemanager": "^3.0.3",
         "laminas/laminas-stdlib": "^3.3",
-        "laminas/laminas-view": "^2.13",
+        "laminas/laminas-view": "^2.13.1",
         "laminas/laminas-zendframework-bridge": "^1.1",
         "symfony/var-dumper": "^5.0.1"
     },

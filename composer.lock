@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccce66a369ffd459946ad661e4d62a0e",
+    "content-hash": "03557cfd02b7b9513e0be6a69c5b9ca7",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -997,16 +997,16 @@
         },
         {
             "name": "laminas/laminas-view",
-            "version": "2.13.0",
+            "version": "2.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-view.git",
-                "reference": "0458742739d0c18743078ecdb1175af1c8264797"
+                "reference": "968738347347234ae1551169a5db0a13dbda8e44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/0458742739d0c18743078ecdb1175af1c8264797",
-                "reference": "0458742739d0c18743078ecdb1175af1c8264797",
+                "url": "https://api.github.com/repos/laminas/laminas-view/zipball/968738347347234ae1551169a5db0a13dbda8e44",
+                "reference": "968738347347234ae1551169a5db0a13dbda8e44",
                 "shasum": ""
             },
             "require": {
@@ -1018,7 +1018,7 @@
             "conflict": {
                 "laminas/laminas-router": "<3.0.1",
                 "laminas/laminas-servicemanager": "<3.3",
-                "zendframework/zend-router": "*"
+                "zendframework/zend-view": "*"
             },
             "require-dev": {
                 "laminas/laminas-authentication": "^2.5",
@@ -1096,7 +1096,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-10-12T18:30:29+00:00"
+            "time": "2021-10-12T22:36:07+00:00"
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
