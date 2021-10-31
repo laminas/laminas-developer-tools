@@ -84,7 +84,7 @@ class ToolbarListenerTest extends TestCase
         $listener->onCollected($profilerEvent);
 
         if ($injected) {
-            $this->assertRegExp('/script/', $response->getBody());
+            $this->assertMatchesRegularExpression('/script/', $response->getBody());
         }
     }
 }
