@@ -121,19 +121,31 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
         return $time;
     }
 
-    /**
-     * @see Serializable
-     */
-    public function serialize()
+    public function __serialize()
     {
         return serialize($this->profiler);
     }
 
     /**
      * @see Serializable
+     * @deprecated
+     */
+    public function serialize()
+    {
+        return $this->__serialize();
+    }
+
+    public function __unserialize($profiler)
+    {
+        $this->profiler = unserialize($profiler);
+    }
+
+    /**
+     * @see Serializable
+     * @deprecated
      */
     public function unserialize($profiler)
     {
-        $this->profiler = unserialize($profiler);
+        $this->__unserialize($profiler);
     }
 }

@@ -192,19 +192,31 @@ class SerializableException implements Serializable
         return $result;
     }
 
-    /**
-     * @see \Serializable
-     */
-    public function serialize()
+    public function __serialize()
     {
         return serialize($this->data);
     }
 
     /**
-     * @see \Serializable
+     * @see Serializable
+     * @deprecated
+     */
+    public function serialize()
+    {
+        return $this->__serialize();
+    }
+
+    public function __unserialize($data)
+    {
+        $this->data = unserialize($data);
+    }
+
+    /**
+     * @see Serializable
+     * @deprecated
      */
     public function unserialize($data)
     {
-        $this->data = unserialize($data);
+        $this->__unserialize($data);
     }
 }
