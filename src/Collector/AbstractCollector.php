@@ -23,8 +23,8 @@ abstract class AbstractCollector implements CollectorInterface, Serializable
     }
 
     /**
-     * @see Serializable
-     * @deprecated
+     * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
+     *             {@see Serializable} as alternative
      */
     public function serialize()
     {
@@ -37,8 +37,8 @@ abstract class AbstractCollector implements CollectorInterface, Serializable
     }
 
     /**
-     * @see Serializable
-     * @deprecated
+     * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
+     *             {@see Serializable} as alternative
      */
     public function unserialize($data)
     {
