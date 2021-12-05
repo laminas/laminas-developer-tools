@@ -33,7 +33,6 @@
         "laminas/laminas-servicemanager": "^3.0.3",
         "laminas/laminas-stdlib": "^3.3",
         "laminas/laminas-view": "^2.13.1",
-        "laminas/laminas-zendframework-bridge": "^1.1",
         "symfony/var-dumper": "^5.0.1 || ^6.0"
     },
     "require-dev": {
@@ -69,7 +68,7 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-developer-tools": "^2.0.0"
+    "conflict": {
+        "zendframework/zend-developer-tools": "*"
     }
 }
