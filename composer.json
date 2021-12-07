@@ -34,7 +34,7 @@
         "laminas/laminas-stdlib": "^3.3",
         "laminas/laminas-view": "^2.13.1",
         "laminas/laminas-zendframework-bridge": "^1.1",
-        "symfony/var-dumper": "^5.0.1"
+        "symfony/var-dumper": "^5.0.1 || ^6.0"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
