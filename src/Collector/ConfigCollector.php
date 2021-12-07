@@ -79,22 +79,34 @@ class ConfigCollector implements CollectorInterface, Serializable
         return isset($this->applicationConfig) ? $this->unserializeArray($this->applicationConfig) : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function serialize()
+    public function __serialize()
     {
         return serialize(['config' => $this->config, 'applicationConfig' => $this->applicationConfig]);
     }
 
     /**
-     * {@inheritDoc}
+     * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
+     *             {@see Serializable} as alternative
      */
-    public function unserialize($serialized)
+    public function serialize()
+    {
+        return $this->__serialize();
+    }
+
+    public function __unserialize($serialized)
     {
         $data                    = unserialize($serialized);
         $this->config            = $data['config'];
         $this->applicationConfig = $data['applicationConfig'];
+    }
+
+    /**
+     * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
+     *             {@see Serializable} as alternative
+     */
+    public function unserialize($serialized)
+    {
+        $this->__unserialize($serialized);
     }
 
     /**
