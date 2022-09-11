@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use Closure;
@@ -9,26 +11,26 @@ use Laminas\Stdlib\ArrayUtils;
 use Serializable;
 use Traversable;
 
+use function is_array;
+use function serialize;
+use function unserialize;
+
 /**
  * Config data collector - dumps the contents of the `Config` and `ApplicationConfig` services
  */
 class ConfigCollector implements CollectorInterface, Serializable
 {
-    const NAME     = 'config';
-    const PRIORITY = 100;
+    public const NAME     = 'config';
+    public const PRIORITY = 100;
 
-    /**
-     * @var array|null
-     */
+    /** @var array|null */
     protected $config;
 
-    /**
-     * @var array|null
-     */
+    /** @var array|null */
     protected $applicationConfig;
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -36,7 +38,7 @@ class ConfigCollector implements CollectorInterface, Serializable
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -44,7 +46,7 @@ class ConfigCollector implements CollectorInterface, Serializable
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function collect(MvcEvent $mvcEvent)
     {
@@ -79,6 +81,9 @@ class ConfigCollector implements CollectorInterface, Serializable
         return isset($this->applicationConfig) ? $this->unserializeArray($this->applicationConfig) : null;
     }
 
+    /**
+     * @return string
+     */
     public function __serialize()
     {
         return serialize(['config' => $this->config, 'applicationConfig' => $this->applicationConfig]);
@@ -87,12 +92,18 @@ class ConfigCollector implements CollectorInterface, Serializable
     /**
      * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
      *             {@see Serializable} as alternative
+     *
+     * @inheritDoc
      */
     public function serialize()
     {
         return $this->__serialize();
     }
 
+    /**
+     * @param string $serialized
+     * @return void
+     */
     public function __unserialize($serialized)
     {
         $data                    = unserialize($serialized);
@@ -103,6 +114,8 @@ class ConfigCollector implements CollectorInterface, Serializable
     /**
      * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
      *             {@see Serializable} as alternative
+     *
+     * @inheritDoc
      */
     public function unserialize($serialized)
     {
@@ -112,7 +125,7 @@ class ConfigCollector implements CollectorInterface, Serializable
     /**
      * Replaces the un-serializable items in an array with stubs
      *
-     * @param array|\Traversable $data
+     * @param array|Traversable $data
      * @return array
      */
     private function makeArraySerializable($data)

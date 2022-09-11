@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\DeveloperTools\Listener;
 
 use Laminas\DeveloperTools\Listener\ToolbarListener;
@@ -16,22 +18,26 @@ use PHPUnit\Framework\TestCase;
 
 class ToolbarListenerTest extends TestCase
 {
-    public function provideHTMLBodyWithInjectedFlag()
+    /**
+     * @return array<non-empty-string, array{0: non-empty-string, 1: bool}>
+     */
+    public function provideHTMLBodyWithInjectedFlag(): array
     {
         return [
             'not HTML5 has head and body' => ['<html><head></head><body></body></html>', true],
-            'not HTML5 has body' => ['<html><body></body></html>', true],
-            'not HTML5 not has body' => ['<html></html>', false],
-            'HTML5 with head' => ['<!doctype html><head></head><body></body>', true],
-            'HTML5 without head' => ['<!doctype html><body></body>', true],
-            'HTML5 without body' => ['<!doctype html>test', true],
+            'not HTML5 has body'          => ['<html><body></body></html>', true],
+            'not HTML5 not has body'      => ['<html></html>', false],
+            'HTML5 with head'             => ['<!doctype html><head></head><body></body>', true],
+            'HTML5 without head'          => ['<!doctype html><body></body>', true],
+            'HTML5 without body'          => ['<!doctype html>test', true],
         ];
     }
 
     /**
      * @dataProvider provideHTMLBodyWithInjectedFlag
+     * @param non-empty-string $htmlBody
      */
-    public function testOnCollected($htmlBody, $injected)
+    public function testOnCollected(string $htmlBody, bool $injected): void
     {
         $viewRenderer = $this->createMock(PhpRenderer::class);
         $viewRenderer->expects($this->any())
@@ -39,8 +45,8 @@ class ToolbarListenerTest extends TestCase
                      ->willReturn('script');
 
         $profilerEvent = $this->createMock(ProfilerEvent::class);
-        $application = $this->createMock(Application::class);
-        $request = $this->createMock(Request::class);
+        $application   = $this->createMock(Application::class);
+        $request       = $this->createMock(Request::class);
         $application->expects($this->once())
                     ->method('getRequest')
                     ->willReturn($request);

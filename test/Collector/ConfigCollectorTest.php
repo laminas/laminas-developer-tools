@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\DeveloperTools\Collector;
 
 use Laminas\DeveloperTools\Collector\ConfigCollector;
@@ -9,11 +11,11 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigCollectorTest extends TestCase
 {
-    public function testCollect()
+    public function testCollect(): void
     {
         $collector = new ConfigCollector();
 
-        $application = $this->getMockBuilder(Mvc\Application::class)
+        $application    = $this->getMockBuilder(Mvc\Application::class)
             ->disableOriginalConstructor()
             ->getMock();
         $serviceManager = $this->getMockBuilder(ServiceManager\ServiceManager::class)

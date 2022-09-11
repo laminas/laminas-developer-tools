@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use Laminas\Mvc\MvcEvent;
@@ -25,8 +27,6 @@ interface CollectorInterface
 
     /**
      * Collects data.
-     *
-     * @param MvcEvent $mvcEvent
      */
     public function collect(MvcEvent $mvcEvent);
 }

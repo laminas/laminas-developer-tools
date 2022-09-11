@@ -1,29 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools;
 
 use Laminas\Stdlib\AbstractOptions;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
+
+use function gettype;
+use function is_array;
+use function sprintf;
 
 /**
  * @todo storage and firephp options
  */
 class Options extends AbstractOptions
 {
-    /**
-     * @var ReportInterface
-     */
+    /** @var ReportInterface */
     protected $report;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $profiler = [
         'enabled'     => false,
         'strict'      => true,
         'flush_early' => false,
         'cache_dir'   => 'data/cache',
         'matcher'     => [],
-        'collectors' => [
+        'collectors'  => [
             'db'        => DbCollector::class,
             'exception' => ExceptionCollector::class,
             'request'   => RequestCollector::class,
@@ -35,22 +38,21 @@ class Options extends AbstractOptions
 
     /**
      * Defaults for event-level logging
+     *
      * @var array
      */
     protected $events = [
-        'enabled'    => false,
-        'collectors' => [
+        'enabled'     => false,
+        'collectors'  => [
             'memory' => MemoryCollector::class,
             'time'   => TimeCollector::class,
         ],
         'identifiers' => [
-            'all' => '*'
-        ]
+            'all' => '*',
+        ],
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $toolbar = [
         'enabled'       => false,
         'auto_hide'     => false,
@@ -66,11 +68,8 @@ class Options extends AbstractOptions
     ];
 
     /**
-     * Overloading Constructor.
-     *
      * @param  array|Traversable|null $options
-     * @param  ReportInterface        $report
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($options, ReportInterface $report)
     {
@@ -131,7 +130,6 @@ class Options extends AbstractOptions
         }
     }
 
-
     /**
      * Sets Profiler matcher options.
      *
@@ -166,7 +164,7 @@ class Options extends AbstractOptions
         }
 
         foreach ($options as $name => $collector) {
-            if (($collector === false || $collector === null)) {
+            if ($collector === false || $collector === null) {
                 unset($this->profiler['collectors'][$name]);
                 continue;
             }
@@ -201,7 +199,7 @@ class Options extends AbstractOptions
         }
 
         foreach ($options as $name => $collector) {
-            if (($collector === false || $collector === null)) {
+            if ($collector === false || $collector === null) {
                 unset($this->events['collectors'][$name]);
                 continue;
             }
@@ -227,7 +225,7 @@ class Options extends AbstractOptions
         }
 
         foreach ($options as $name => $identifier) {
-            if (($identifier === false || $identifier === null)) {
+            if ($identifier === false || $identifier === null) {
                 unset($this->events['identifiers'][$name]);
                 continue;
             }
@@ -266,9 +264,9 @@ class Options extends AbstractOptions
      */
     public function canFlushEarly()
     {
-        return ($this->profiler['flush_early']
+        return $this->profiler['flush_early']
             && ! $this->profiler['strict']
-            && ! $this->toolbar['enabled']);
+            && ! $this->toolbar['enabled'];
     }
 
     /**
@@ -313,7 +311,6 @@ class Options extends AbstractOptions
     {
         return $this->events['identifiers'];
     }
-
 
     /**
      * Sets Toolbar options.

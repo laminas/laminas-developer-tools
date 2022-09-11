@@ -1,8 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Exception;
 
 use Serializable;
+use Throwable;
+
+use function array_pop;
+use function explode;
+use function get_class;
+use function get_resource_type;
+use function implode;
+use function is_array;
+use function is_bool;
+use function is_object;
+use function is_resource;
+use function serialize;
+use function unserialize;
 
 class SerializableException implements Serializable
 {
@@ -16,7 +31,7 @@ class SerializableException implements Serializable
     /**
      * Saves the exception data in an array.
      *
-     * @param \Exception|\Throwable $exception
+     * @param Exception|Throwable $exception
      */
     public function __construct($exception)
     {
@@ -94,9 +109,6 @@ class SerializableException implements Serializable
     /**
      * This function uses code coming from Symfony 2.
      *
-     * @copyright Copyright (c) Fabien Potencier <fabien@symfony.com> (http://symfony.com/)
-     * @license   http://symfony.com/doc/current/contributing/code/license.html  MIT license
-     *
      * @param  array   $trace
      * @param  string  $file
      * @param  integer $line
@@ -118,23 +130,23 @@ class SerializableException implements Serializable
         ];
 
         foreach ($trace as $entry) {
-            $class = '';
+            $class     = '';
             $namespace = '';
 
             if (isset($entry['class'])) {
-                $parts = explode('\\', $entry['class']);
-                $class = array_pop($parts);
+                $parts     = explode('\\', $entry['class']);
+                $class     = array_pop($parts);
                 $namespace = implode('\\', $parts);
             }
 
             $filteredTrace[] = [
                 'namespace'   => $namespace,
                 'short_class' => $class,
-                'class'       => isset($entry['class']) ? $entry['class'] : '',
-                'type'        => isset($entry['type']) ? $entry['type'] : '',
+                'class'       => $entry['class'] ?? '',
+                'type'        => $entry['type'] ?? '',
                 'function'    => $entry['function'],
-                'file'        => isset($entry['file']) ? $entry['file'] : null,
-                'line'        => isset($entry['line']) ? $entry['line'] : null,
+                'file'        => $entry['file'] ?? null,
+                'line'        => $entry['line'] ?? null,
                 'args'        => isset($entry['args']) ? $this->filterArgs($entry['args']) : [],
             ];
         }
@@ -144,9 +156,6 @@ class SerializableException implements Serializable
 
     /**
      * This function uses code coming from Symfony 2.
-     *
-     * @copyright Copyright (c) Fabien Potencier <fabien@symfony.com> (http://symfony.com/)
-     * @license   http://symfony.com/doc/current/contributing/code/license.html  MIT license
      *
      * @param  array   $args
      * @param  integer $level
@@ -192,6 +201,9 @@ class SerializableException implements Serializable
         return $result;
     }
 
+    /**
+     * @return string
+     */
     public function __serialize()
     {
         return serialize($this->data);
@@ -200,12 +212,18 @@ class SerializableException implements Serializable
     /**
      * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
      *             {@see Serializable} as alternative
+     *
+     * @inheritDoc
      */
     public function serialize()
     {
         return $this->__serialize();
     }
 
+    /**
+     * @param string $data
+     * @return void
+     */
     public function __unserialize($data)
     {
         $this->data = unserialize($data);
@@ -214,6 +232,8 @@ class SerializableException implements Serializable
     /**
      * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
      *             {@see Serializable} as alternative
+     *
+     * @inheritDoc
      */
     public function unserialize($data)
     {

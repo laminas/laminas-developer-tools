@@ -1,8 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\View\Helper;
 
 use Laminas\View\Helper\AbstractHelper;
+
+use function implode;
+use function sprintf;
 
 class DetailArray extends AbstractHelper
 {
@@ -16,16 +21,15 @@ class DetailArray extends AbstractHelper
      */
     public function __invoke($label, array $details, $redundant = false)
     {
-        $r   = [];
+        $r = [];
 
         $r[] = '<span class="laminas-toolbar-info';
-        $r[] = ($redundant) ? ' laminas-toolbar-info-redundant' : '';
+        $r[] = $redundant ? ' laminas-toolbar-info-redundant' : '';
         $r[] = '">';
 
         $r[] = '<span class="laminas-detail-label">';
         $r[] = $label;
         $r[] = '</span>';
-
 
         $extraCss = '';
         $newLine  = false;
@@ -33,7 +37,7 @@ class DetailArray extends AbstractHelper
         foreach ($details as $entry) {
             if ($newLine === true) {
                 $r[] = '</span><span class="laminas-toolbar-info';
-                $r[] = ($redundant) ? ' laminas-toolbar-info-redundant' : '';
+                $r[] = $redundant ? ' laminas-toolbar-info-redundant' : '';
                 $r[] = '">';
             }
 

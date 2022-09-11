@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Listener;
 
 use Laminas\DeveloperTools\Profiler;
@@ -8,6 +10,8 @@ use Laminas\EventManager\ListenerAggregateInterface;
 use Laminas\EventManager\ListenerAggregateTrait;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Stdlib\ResponseInterface;
+
+use function is_callable;
 
 /**
  * Flush Listener
@@ -19,7 +23,7 @@ class FlushListener implements ListenerAggregateInterface
     use ListenerAggregateTrait;
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
@@ -32,8 +36,6 @@ class FlushListener implements ListenerAggregateInterface
 
     /**
      * MvcEvent::EVENT_FINISH event callback
-     *
-     * @param MvcEvent $event
      */
     public function onFinish(MvcEvent $event)
     {

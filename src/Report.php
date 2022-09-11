@@ -1,46 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools;
+
+use DateTime;
+
+use function array_keys;
 
 class Report implements ReportInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $ip;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $uri;
 
-    /**
-     * @var \DateTime
-     */
+    /** @var DateTime */
     protected $time;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $token;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $errors;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $method;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $collectors = [];
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setIp($ip)
     {
@@ -49,7 +41,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getIp()
     {
@@ -57,7 +49,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setUri($uri)
     {
@@ -66,7 +58,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getUri()
     {
@@ -74,7 +66,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setTime($time)
     {
@@ -83,7 +75,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getTime()
     {
@@ -91,7 +83,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setToken($token)
     {
@@ -100,7 +92,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getToken()
     {
@@ -108,7 +100,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function addError($error)
     {
@@ -121,7 +113,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getErrors()
     {
@@ -129,7 +121,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function hasErrors()
     {
@@ -137,7 +129,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setMethod($method)
     {
@@ -146,7 +138,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getMethod()
     {
@@ -154,7 +146,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function hasCollector($name)
     {
@@ -162,7 +154,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getCollector($name)
     {
@@ -174,7 +166,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getCollectors()
     {
@@ -182,7 +174,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getCollectorNames()
     {
@@ -190,7 +182,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setCollectors(array $collectors)
     {
@@ -202,7 +194,7 @@ class Report implements ReportInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function addCollector(Collector\CollectorInterface $collector)
     {

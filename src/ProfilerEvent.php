@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools;
 
 use Laminas\EventManager\Event;
@@ -14,7 +16,7 @@ class ProfilerEvent extends Event
      *
      * @var string
      */
-    const EVENT_PROFILER_INIT = 'profiler_init';
+    public const EVENT_PROFILER_INIT = 'profiler_init';
 
     /**
      * The EVENT_COLLECTED occurs after all data was collected.
@@ -23,7 +25,7 @@ class ProfilerEvent extends Event
      *
      * @var string
      */
-    const EVENT_COLLECTED = 'collected';
+    public const EVENT_COLLECTED = 'collected';
 
     /**
      * Set Application
@@ -38,7 +40,6 @@ class ProfilerEvent extends Event
     /**
      * Set Application
      *
-     * @param  ApplicationInterface $application
      * @return self
      */
     public function setApplication(ApplicationInterface $application)
@@ -60,7 +61,6 @@ class ProfilerEvent extends Event
     /**
      * Set profiler
      *
-     * @param  Profiler $profiler
      * @return self
      */
     public function setProfiler(Profiler $profiler)
@@ -82,7 +82,6 @@ class ProfilerEvent extends Event
     /**
      * Set report
      *
-     * @param  ReportInterface $report
      * @return self
      */
     public function setReport(ReportInterface $report)

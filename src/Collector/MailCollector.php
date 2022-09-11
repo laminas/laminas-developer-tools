@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use Laminas\Mvc\MvcEvent;
 
 /**
  * Mail Data Collector.
- *
  */
 class MailCollector extends AbstractCollector implements AutoHideInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -19,7 +20,7 @@ class MailCollector extends AbstractCollector implements AutoHideInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -27,7 +28,7 @@ class MailCollector extends AbstractCollector implements AutoHideInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function collect(MvcEvent $mvcEvent)
     {
@@ -35,7 +36,7 @@ class MailCollector extends AbstractCollector implements AutoHideInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function canHide()
     {

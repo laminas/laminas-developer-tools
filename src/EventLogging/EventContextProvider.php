@@ -1,33 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\EventLogging;
 
 use InvalidArgumentException;
 use Laminas\EventManager\EventInterface;
 
+use function array_splice;
+use function basename;
+use function debug_backtrace;
+use function dirname;
+use function file_exists;
+use function get_class;
+use function get_resource_type;
+use function gettype;
+use function is_object;
+use function is_resource;
+use function is_scalar;
+use function sprintf;
+
 /**
  * Class to provide context information for a passed event.
- *
- * @author Mark Garrett <mark.garrett@allcarepharmacy.com>
  */
 class EventContextProvider implements EventContextInterface
 {
-    /**
-     * @var EventInterface
-     */
+    /** @var EventInterface */
     protected $event;
 
-    /**
-     *
-     * @var array
-     */
+    /** @var array */
     private $debugBacktrace = [];
 
     /**
      * @param EventInterface|null $event (Optional) The event to provide context to.
      * The event must be set either here or with {@see setEvent()} before any other methods can be used.
      */
-    public function __construct(EventInterface $event = null)
+    public function __construct(?EventInterface $event = null)
     {
         if ($event) {
             $this->setEvent($event);
@@ -36,6 +44,7 @@ class EventContextProvider implements EventContextInterface
 
     /**
      * @see \Laminas\DeveloperTools\EventLogging\EventContextInterface::setEvent()
+     *
      * @param  EventInterface $event The event to add context to.
      * @return void
      */
@@ -46,6 +55,7 @@ class EventContextProvider implements EventContextInterface
 
     /**
      * @see \Laminas\DeveloperTools\EventLogging\EventContextInterface::getEvent()
+     *
      * @return EventInterface
      */
     public function getEvent()
@@ -105,7 +115,7 @@ class EventContextProvider implements EventContextInterface
     {
         if (! $this->debugBacktrace) {
             //Remove the levels this method introduces
-            $trace = debug_backtrace();
+            $trace                = debug_backtrace();
             $this->debugBacktrace = array_splice($trace, 2);
         }
 

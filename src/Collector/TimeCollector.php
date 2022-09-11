@@ -1,10 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use Laminas\DeveloperTools\EventLogging\EventContextProvider;
 use Laminas\EventManager\EventInterface;
 use Laminas\Mvc\MvcEvent;
+
+use function defined;
+use function microtime;
+use function next;
+use function prev;
+
+use const PHP_INT_MAX;
+use const PHP_VERSION_ID;
 
 /**
  * Time Data Collector.
@@ -12,7 +22,7 @@ use Laminas\Mvc\MvcEvent;
 class TimeCollector extends AbstractCollector implements EventCollectorInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -20,7 +30,7 @@ class TimeCollector extends AbstractCollector implements EventCollectorInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -28,7 +38,7 @@ class TimeCollector extends AbstractCollector implements EventCollectorInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function collect(MvcEvent $mvcEvent)
     {
@@ -46,7 +56,6 @@ class TimeCollector extends AbstractCollector implements EventCollectorInterface
      * Saves the current time in microseconds for a specific event.
      *
      * @param string         $id
-     * @param EventInterface $event
      */
     public function collectEvent($id, EventInterface $event)
     {
@@ -111,11 +120,11 @@ class TimeCollector extends AbstractCollector implements EventCollectorInterface
 
         $previous = null;
         foreach ($app as $index => $context) {
-            $result[$index] = $context;
-            $result[$index]['elapsed'] = ($previous)
-                ? ($context['time'] - $previous['time'])
-                : ($context['time'] - $this->data['start']);
-            $previous = prev($app);
+            $result[$index]            = $context;
+            $result[$index]['elapsed'] = $previous
+                ? $context['time'] - $previous['time']
+                : $context['time'] - $this->data['start'];
+            $previous                  = prev($app);
             next($app);
         }
 
@@ -125,7 +134,6 @@ class TimeCollector extends AbstractCollector implements EventCollectorInterface
     /**
      * Determine the start time
      *
-     * @param MvcEvent $mvcEvent
      * @return float
      */
     private function marshalStartTime(MvcEvent $mvcEvent)

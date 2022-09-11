@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Listener;
 
 use Laminas\DeveloperTools\Collector\CollectorInterface;
@@ -9,33 +11,29 @@ use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 
+use function array_map;
+use function array_values;
+
 /**
  * Listens to defined events to allow event-level collection of statistics.
  *
- * @author Mark Garrett <mark@moderndeveloperllc.com>
  * @since 0.0.3
  */
 class EventLoggingListenerAggregate
 {
-    /**
-     * @var EventCollectorInterface[]
-     */
+    /** @var EventCollectorInterface[] */
     protected $collectors;
 
-    /**
-     * @var string[] The event identifiers to collect
-     */
+    /** @var string[] The event identifiers to collect */
     protected $identifiers;
 
     /**
-     * Constructor.
-     *
      * @param EventCollectorInterface[] $collectors
      * @param string[]                                                $identifiers
      */
     public function __construct(array $collectors, array $identifiers)
     {
-        $this->collectors = array_map(
+        $this->collectors  = array_map(
             function (CollectorInterface $collector) {
                 return $collector;
             },
@@ -50,7 +48,9 @@ class EventLoggingListenerAggregate
     }
 
     /**
-     * {@inheritdoc}
+     * Attach events to a shared event manager
+     *
+     * @return void
      */
     public function attachShared(SharedEventManagerInterface $events)
     {
@@ -60,7 +60,9 @@ class EventLoggingListenerAggregate
     }
 
     /**
-     * {@inheritdoc}
+     * Detach events from a shared event manager
+     *
+     * @return void
      */
     public function detachShared(SharedEventManagerInterface $events)
     {
@@ -70,8 +72,7 @@ class EventLoggingListenerAggregate
     /**
      * Callback to process events
      *
-     * @param EventInterface $event
-     * @return bool
+     * @return void
      * @throws ServiceNotFoundException
      */
     public function onCollectEvent(EventInterface $event)

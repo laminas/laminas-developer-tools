@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Exception;
 
-class ParameterMissingException extends \Exception implements ExceptionInterface
+use Exception;
+
+class ParameterMissingException extends Exception implements ExceptionInterface
 {
 }
