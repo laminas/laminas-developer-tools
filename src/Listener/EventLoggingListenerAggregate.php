@@ -34,15 +34,11 @@ class EventLoggingListenerAggregate
     public function __construct(array $collectors, array $identifiers)
     {
         $this->collectors  = array_map(
-            function (CollectorInterface $collector) {
-                return $collector;
-            },
+            static fn(CollectorInterface $collector) => $collector,
             $collectors
         );
         $this->identifiers = array_values(array_map(
-            function ($identifier) {
-                return (string) $identifier;
-            },
+            static fn($identifier) => (string) $identifier,
             $identifiers
         ));
     }

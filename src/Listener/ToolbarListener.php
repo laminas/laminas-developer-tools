@@ -151,9 +151,11 @@ class ToolbarListener implements ListenerAggregateInterface
             $injected = preg_replace('/<\/' . $prepend . '>/i', $style . "\n</$prepend>", $injected, 1);
         } else {
             $injected = $isHtml5
-                ? (stripos($content, '</html>') !== false
-                    ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $content, 1)
-                    : '<!doctype html>' . $content . $style . $toolbar . $script)
+                ? (
+                    stripos($content, '</html>') !== false
+                        ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $content, 1)
+                        : '<!doctype html>' . $content . $style . $toolbar . $script
+                )
                 : $content;
         }
 
