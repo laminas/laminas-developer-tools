@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools;
+
+use DateTime;
 
 interface ReportInterface
 {
@@ -27,13 +31,13 @@ interface ReportInterface
     public function getUri();
 
     /**
-     * @param  \DateTime $time
+     * @param DateTime $time
      * @return self
      */
     public function setTime($time);
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTime();
 
@@ -104,7 +108,6 @@ interface ReportInterface
     public function setCollectors(array $collectors);
 
     /**
-     * @param  Collector\CollectorInterface $collector
      * @return self
      */
     public function addCollector(Collector\CollectorInterface $collector);

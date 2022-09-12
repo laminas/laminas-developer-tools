@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Listener;
 
 use Laminas\DeveloperTools\Options;
@@ -12,6 +14,8 @@ use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 
+use function sprintf;
+
 /**
  * Profiler Listener
  *
@@ -21,22 +25,12 @@ class ProfilerListener implements ListenerAggregateInterface
 {
     use ListenerAggregateTrait;
 
-    /**
-     * @var ServiceLocatorInterface
-     */
+    /** @var ServiceLocatorInterface */
     protected $serviceLocator;
 
-    /**
-     * @var Options
-     */
+    /** @var Options */
     protected $options;
 
-    /**
-     * Constructor.
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param Options                 $options
-     */
     public function __construct(ServiceLocatorInterface $serviceLocator, Options $options)
     {
         $this->options        = $options;
@@ -44,7 +38,7 @@ class ProfilerListener implements ListenerAggregateInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
@@ -58,7 +52,6 @@ class ProfilerListener implements ListenerAggregateInterface
     /**
      * MvcEvent::EVENT_FINISH event callback
      *
-     * @param  MvcEvent $event
      * @throws ServiceNotFoundException
      */
     public function onFinish(MvcEvent $event)

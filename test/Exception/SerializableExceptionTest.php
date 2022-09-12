@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\DeveloperTools\Exception;
 
 use Exception;
@@ -10,9 +12,9 @@ use Throwable;
 
 class SerializableExceptionTest extends TestCase
 {
-    public function testSerializableExceptionUsesPreviousExceptionMessage()
+    public function testSerializableExceptionUsesPreviousExceptionMessage(): void
     {
-        $original = new Exception('foo');
+        $original     = new Exception('foo');
         $serializable = new SerializableException($original);
         $this->assertEquals($original->getMessage(), $serializable->getMessage());
     }
@@ -20,10 +22,10 @@ class SerializableExceptionTest extends TestCase
     /**
      * @requires PHP 7
      */
-    public function testSerializableExceptionReportsCallToUndefinedMethod()
+    public function testSerializableExceptionReportsCallToUndefinedMethod(): void
     {
         try {
-            (new stdClass)->iDoNotExist();
+            (new stdClass())->iDoNotExist();
         } catch (Throwable $exception) {
             $serializable = new SerializableException($exception);
             $this->assertEquals('Call to undefined method stdClass::iDoNotExist()', $serializable->getMessage());

@@ -1,10 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use Laminas\DeveloperTools\EventLogging\EventContextProvider;
 use Laminas\EventManager\EventInterface;
 use Laminas\Mvc\MvcEvent;
+
+use function memory_get_peak_usage;
+use function memory_get_usage;
+use function next;
+use function prev;
+
+use const PHP_INT_MAX;
 
 /**
  * Memory Data Collector.
@@ -12,7 +21,7 @@ use Laminas\Mvc\MvcEvent;
 class MemoryCollector extends AbstractCollector implements EventCollectorInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -20,7 +29,7 @@ class MemoryCollector extends AbstractCollector implements EventCollectorInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -28,7 +37,7 @@ class MemoryCollector extends AbstractCollector implements EventCollectorInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function collect(MvcEvent $mvcEvent)
     {
@@ -37,14 +46,13 @@ class MemoryCollector extends AbstractCollector implements EventCollectorInterfa
         }
 
         $this->data['memory'] = memory_get_peak_usage(true);
-        $this->data['end'] = memory_get_usage(true);
+        $this->data['end']    = memory_get_usage(true);
     }
 
     /**
      * Saves the current memory usage.
      *
      * @param string         $id
-     * @param EventInterface $event
      */
     public function collectEvent($id, EventInterface $event)
     {
@@ -99,11 +107,11 @@ class MemoryCollector extends AbstractCollector implements EventCollectorInterfa
 
         $previous = null;
         foreach ($app as $name => $context) {
-            $result[$name] = $context;
-            $result[$name]['difference'] = ($previous)
-                ? ($context['memory'] - $previous['memory'])
-                : ($context['memory']);
-            $previous = prev($app);
+            $result[$name]               = $context;
+            $result[$name]['difference'] = $previous
+                ? $context['memory'] - $previous['memory']
+                : $context['memory'];
+            $previous                    = prev($app);
             next($app);
         }
 

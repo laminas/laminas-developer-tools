@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Listener;
 
 use Laminas\DeveloperTools\Profiler;
@@ -16,23 +18,16 @@ class StorageListener implements ListenerAggregateInterface
 {
     use ListenerAggregateTrait;
 
-    /**
-     * @var ServiceLocatorInterface
-     */
+    /** @var ServiceLocatorInterface */
     protected $serviceLocator;
 
-    /**
-     * Constructor.
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     */
     public function __construct(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
@@ -45,8 +40,6 @@ class StorageListener implements ListenerAggregateInterface
 
     /**
      * ProfilerEvent::EVENT_COLLECTED event callback.
-     *
-     * @param ProfilerEvent $event
      */
     public function onCollected(ProfilerEvent $event)
     {

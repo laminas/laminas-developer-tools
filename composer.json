@@ -17,9 +17,12 @@
         "forum": "https://discourse.laminas.dev"
     },
     "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
         "sort-packages": true,
         "platform": {
-            "php": "7.3.99"
+            "php": "7.4.99"
         }
     },
     "extra": {
@@ -28,19 +31,21 @@
         }
     },
     "require": {
-        "php": "^7.3 || ~8.0.0 || ~8.1.0",
-        "laminas/laminas-eventmanager": "^3.3",
+        "php": "^7.4 || ~8.0.0 || ~8.1.0",
+        "laminas/laminas-eventmanager": "^3.4",
         "laminas/laminas-http": "^2.15",
         "laminas/laminas-modulemanager": "^2.10",
         "laminas/laminas-mvc": "^3.1",
-        "laminas/laminas-servicemanager": "^3.0.3",
-        "laminas/laminas-stdlib": "^3.3",
+        "laminas/laminas-servicemanager": "^3.3",
+        "laminas/laminas-stdlib": "^3.6",
         "laminas/laminas-view": "^2.13.1",
         "symfony/var-dumper": "^5.0.1 || ^6.0"
     },
     "require-dev": {
-        "laminas/laminas-coding-standard": "~1.0.0",
-        "phpunit/phpunit": "^9.3"
+        "laminas/laminas-coding-standard": "~2.4.0",
+        "phpunit/phpunit": "^9.3.4",
+        "psalm/plugin-phpunit": "^0.17.0",
+        "vimeo/psalm": "^4.6"
     },
     "suggest": {
         "aist/aist-git-tools": "Show you information about current GIT repository",
@@ -64,10 +69,12 @@
     "scripts": {
         "check": [
             "@cs-check",
+            "@static-analysis",
             "@test"
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },

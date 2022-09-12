@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use Laminas\DeveloperTools\Exception\SerializableException;
@@ -12,7 +14,7 @@ use Laminas\Mvc\MvcEvent;
 class ExceptionCollector extends AbstractCollector
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -20,7 +22,7 @@ class ExceptionCollector extends AbstractCollector
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -28,13 +30,13 @@ class ExceptionCollector extends AbstractCollector
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function collect(MvcEvent $mvcEvent)
     {
         if ($mvcEvent->getError() === Application::ERROR_EXCEPTION) {
             $this->data = [
-                'exception' => new SerializableException($mvcEvent->getParam('exception'))
+                'exception' => new SerializableException($mvcEvent->getParam('exception')),
             ];
         }
     }
@@ -56,7 +58,7 @@ class ExceptionCollector extends AbstractCollector
      */
     public function hasPreviousException()
     {
-        return (isset($this->data['exception']) && $this->data['exception']->getPrevious() !== null);
+        return isset($this->data['exception']) && $this->data['exception']->getPrevious() !== null;
     }
 
     /**

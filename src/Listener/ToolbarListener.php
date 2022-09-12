@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Listener;
 
 use Laminas\DeveloperTools\Collector\AutoHideInterface;
@@ -13,6 +15,23 @@ use Laminas\EventManager\ListenerAggregateTrait;
 use Laminas\View\Exception\RuntimeException;
 use Laminas\View\Model\ViewModel;
 
+use function array_keys;
+use function explode;
+use function extension_loaded;
+use function file_exists;
+use function file_get_contents;
+use function file_put_contents;
+use function implode;
+use function is_dir;
+use function phpversion;
+use function preg_match;
+use function preg_replace;
+use function sprintf;
+use function str_replace;
+use function stripos;
+use function strpos;
+use function time;
+
 /**
  * Developer Toolbar Listener
  */
@@ -25,30 +44,23 @@ class ToolbarListener implements ListenerAggregateInterface
      *
      * @var integer
      */
-    const VERSION_CACHE_TTL = 3600;
+    public const VERSION_CACHE_TTL = 3600;
 
     /**
      * Documentation URI pattern.
      *
      * @var string
      */
-    const DOC_URI = 'https://docs.laminas.dev/';
+    public const DOC_URI = 'https://docs.laminas.dev/';
 
-    /**
-     * @var object
-     */
+    /** @var object */
     protected $renderer;
 
-    /**
-     * @var Options
-     */
+    /** @var Options */
     protected $options;
 
     /**
-     * Constructor.
-     *
      * @param object  $viewRenderer
-     * @param Options $options
      */
     public function __construct($viewRenderer, Options $options)
     {
@@ -57,7 +69,7 @@ class ToolbarListener implements ListenerAggregateInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
@@ -71,8 +83,6 @@ class ToolbarListener implements ListenerAggregateInterface
 
     /**
      * ProfilerEvent::EVENT_COLLECTED event callback.
-     *
-     * @param ProfilerEvent $event
      */
     public function onCollected(ProfilerEvent $event)
     {
@@ -84,8 +94,9 @@ class ToolbarListener implements ListenerAggregateInterface
         }
 
         $response = $application->getResponse();
-        $headers = $response->getHeaders();
-        if ($headers->has('Content-Type')
+        $headers  = $response->getHeaders();
+        if (
+            $headers->has('Content-Type')
             && false === strpos($headers->get('Content-Type')->getFieldValue(), 'html')
         ) {
             return;
@@ -100,32 +111,30 @@ class ToolbarListener implements ListenerAggregateInterface
     /**
      * Tries to injects the toolbar into the view. The toolbar is only injected in well
      * formed HTML by replacing the closing body tag, leaving ESI untouched.
-     *
-     * @param ProfilerEvent $event
      */
     protected function injectToolbar(ProfilerEvent $event)
     {
-        $entries     = $this->renderEntries($event);
-        $response    = $event->getApplication()->getResponse();
+        $entries  = $this->renderEntries($event);
+        $response = $event->getApplication()->getResponse();
 
         $toolbarView = new ViewModel(['entries' => $entries]);
         $toolbarView->setTemplate('laminas-developer-tools/toolbar/toolbar');
-        $toolbar     = $this->renderer->render($toolbarView);
+        $toolbar = $this->renderer->render($toolbarView);
 
-        $toolbarCss  = new ViewModel([
+        $toolbarCss = new ViewModel([
             'position' => $this->options->getToolbarPosition(),
         ]);
         $toolbarCss->setTemplate('laminas-developer-tools/toolbar/style');
-        $style       = $this->renderer->render($toolbarCss);
+        $style = $this->renderer->render($toolbarCss);
 
-        $toolbarJs   = new ViewModel();
+        $toolbarJs = new ViewModel();
         $toolbarJs->setTemplate('laminas-developer-tools/toolbar/script');
-        $script      = $this->renderer->render($toolbarJs);
+        $script = $this->renderer->render($toolbarJs);
 
-        $toolbar  = str_replace(['$', '\\\\'], ['\$', '\\\\\\'], $toolbar);
+        $toolbar = str_replace(['$', '\\\\'], ['\$', '\\\\\\'], $toolbar);
 
         $content = $response->getBody();
-        $isHTML5 = stripos($content, '<!doctype html>') === 0;
+        $isHtml5 = stripos($content, '<!doctype html>') === 0;
 
         if (preg_match('/<\/body>(?![\s\S]*<\/body>)/i', $content)) {
             $injected = preg_replace(
@@ -135,16 +144,16 @@ class ToolbarListener implements ListenerAggregateInterface
                 1
             );
 
-            $prepend = $isHTML5
+            $prepend = $isHtml5
                 ? (preg_match('/<\/head>/i', $injected) ? 'head' : 'body')
                 : 'body';
 
             $injected = preg_replace('/<\/' . $prepend . '>/i', $style . "\n</$prepend>", $injected, 1);
         } else {
-            $injected = $isHTML5
+            $injected = $isHtml5
                 ? (stripos($content, '</html>') !== false
                     ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $content, 1)
-                    : '<!doctype html>' . $content . $style. $toolbar . $script)
+                    : '<!doctype html>' . $content . $style . $toolbar . $script)
                 : $content;
         }
 
@@ -154,14 +163,13 @@ class ToolbarListener implements ListenerAggregateInterface
     /**
      * Renders all toolbar entries.
      *
-     * @param  ProfilerEvent $event
      * @return array
      * @throws InvalidOptionException
      */
     protected function renderEntries(ProfilerEvent $event)
     {
-        $entries = [];
-        $report  = $event->getReport();
+        $entries      = [];
+        $report       = $event->getReport();
         $laminasEntry = new ViewModel([
             'php_version' => phpversion(),
             'has_intl'    => extension_loaded('intl'),
@@ -180,7 +188,8 @@ class ToolbarListener implements ListenerAggregateInterface
                 try {
                     $collectorInstance = $report->getCollector($name);
 
-                    if ($this->options->getToolbarAutoHide()
+                    if (
+                        $this->options->getToolbarAutoHide()
                         && $collectorInstance instanceof AutoHideInterface
                         && $collectorInstance->canHide()
                     ) {
@@ -213,7 +222,7 @@ class ToolbarListener implements ListenerAggregateInterface
         }
 
         if ($report->hasErrors()) {
-            $errorTpl  = new ViewModel(['errors' => $report->getErrors()]);
+            $errorTpl = new ViewModel(['errors' => $report->getErrors()]);
             $errorTpl->setTemplate('laminas-developer-tools/toolbar/error');
             $entries[] = $this->renderer->render($errorTpl);
         }
@@ -253,8 +262,8 @@ class ToolbarListener implements ListenerAggregateInterface
                 }
 
                 return [
-                    ($cache[1] === 'yes') ? true : false,
-                    $cache[2]
+                    $cache[1] === 'yes' ? true : false,
+                    $cache[2],
                 ];
             }
         }
@@ -267,8 +276,8 @@ class ToolbarListener implements ListenerAggregateInterface
             sprintf(
                 '%d|%s|%s',
                 time(),
-                ($isLatest) ? 'yes' : 'no',
-                ($latest === null) ? 'N/A' : $latest
+                $isLatest ? 'yes' : 'no',
+                $latest ?? 'N/A'
             )
         );
 

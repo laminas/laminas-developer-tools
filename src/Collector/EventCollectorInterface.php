@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use Laminas\EventManager\EventInterface;
@@ -13,7 +15,6 @@ interface EventCollectorInterface
      * Collects event-level information
      *
      * @param string         $id
-     * @param EventInterface $event
      */
     public function collectEvent($id, EventInterface $event);
 }

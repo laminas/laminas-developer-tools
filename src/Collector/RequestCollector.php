@@ -1,10 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use Laminas\Mvc\MvcEvent;
 use Laminas\View\Model\ModelInterface;
 use Laminas\View\Variables;
+
+use function array_filter;
+use function array_pop;
+use function explode;
+use function get_class;
+use function gettype;
+use function in_array;
+use function is_object;
+use function sort;
+use function sprintf;
+
+use const ARRAY_FILTER_USE_KEY;
 
 /**
  * Request Data Collector.
@@ -12,7 +26,7 @@ use Laminas\View\Variables;
 class RequestCollector extends AbstractCollector
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -20,7 +34,7 @@ class RequestCollector extends AbstractCollector
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -28,12 +42,12 @@ class RequestCollector extends AbstractCollector
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function collect(MvcEvent $mvcEvent)
     {
-        $views = [];
-        $match = $mvcEvent->getRouteMatch();
+        $views     = [];
+        $match     = $mvcEvent->getRouteMatch();
         $viewModel = $mvcEvent->getViewModel();
 
         $addToViewFromModel = function (ModelInterface $child) use (&$views) {
@@ -51,7 +65,7 @@ class RequestCollector extends AbstractCollector
 
             $views[] = [
                 'template' => $child->getTemplate(),
-                'vars' => $vars,
+                'vars'     => $vars,
             ];
         };
 
@@ -59,20 +73,19 @@ class RequestCollector extends AbstractCollector
         $this->addChildrenToView($viewModel, $addToViewFromModel);
 
         $this->data = [
-            'views'      => $views,
-            'method'     => $mvcEvent->getRequest()->getMethod(),
-            'status'     => $mvcEvent->getResponse()->getStatusCode(),
-            'route'      => ($match === null) ? 'N/A' : $match->getMatchedRouteName(),
-            'action'     => ($match === null) ? 'N/A' : $match->getParam('action', 'N/A'),
-            'controller' => ($match === null) ? 'N/A' : $match->getParam('controller', 'N/A'),
-            'other_route_parameters' => ($match === null) ? 'N/A' : array_filter($match->getParams(), function ($key) {
+            'views'                  => $views,
+            'method'                 => $mvcEvent->getRequest()->getMethod(),
+            'status'                 => $mvcEvent->getResponse()->getStatusCode(),
+            'route'                  => $match === null ? 'N/A' : $match->getMatchedRouteName(),
+            'action'                 => $match === null ? 'N/A' : $match->getParam('action', 'N/A'),
+            'controller'             => $match === null ? 'N/A' : $match->getParam('controller', 'N/A'),
+            'other_route_parameters' => $match === null ? 'N/A' : array_filter($match->getParams(), function ($key) {
                 return ! in_array($key, ['action', 'controller']);
             }, ARRAY_FILTER_USE_KEY),
         ];
     }
 
     /**
-     * @param ModelInterface $viewModel
      * @param callable $addToViewFromModel
      */
     protected function addChildrenToView(ModelInterface $viewModel, $addToViewFromModel)
@@ -139,6 +152,7 @@ class RequestCollector extends AbstractCollector
 
     /**
      * Returns parameters except controller and actions
+     *
      * @return array
      */
     public function getOtherParameters()

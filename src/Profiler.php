@@ -1,14 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools;
 
 use DateTime;
-use DateTimezone;
+use DateTimeZone;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Stdlib\PriorityQueue;
+
+use function get_class;
+use function sprintf;
+use function uniqid;
+
+use const PHP_INT_MAX;
 
 class Profiler implements EventManagerAwareInterface
 {
@@ -17,14 +25,14 @@ class Profiler implements EventManagerAwareInterface
      *
      * @var int
      */
-    const PRIORITY_EVENT_COLLECTOR = PHP_INT_MAX;
+    public const PRIORITY_EVENT_COLLECTOR = PHP_INT_MAX;
 
     /**
      * FirePHP listener priority.
      *
      * @var int
      */
-    const PRIORITY_FIREPHP = 500;
+    public const PRIORITY_FIREPHP = 500;
 
     /**
      * Flush listener priority.
@@ -32,59 +40,44 @@ class Profiler implements EventManagerAwareInterface
      *
      * @var int
      */
-    const PRIORITY_FLUSH = -9400;
+    public const PRIORITY_FLUSH = -9400;
 
     /**
      * Profiler listener priority.
      *
      * @var int
      */
-    const PRIORITY_PROFILER = -9500;
+    public const PRIORITY_PROFILER = -9500;
 
     /**
      * Storage listener priority.
      *
      * @var int
      */
-    const PRIORITY_STORAGE = 100;
+    public const PRIORITY_STORAGE = 100;
 
     /**
      * Toolbar listener priority.
      *
      * @var int
      */
-    const PRIORITY_TOOLBAR = 500;
+    public const PRIORITY_TOOLBAR = 500;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $strict;
 
-    /**
-     * @var ProfilerEvent
-     */
+    /** @var ProfilerEvent */
     protected $event;
 
-    /**
-     * @var ReportInterface
-     */
+    /** @var ReportInterface */
     protected $report;
 
-    /**
-     * @var PriorityQueue
-     */
+    /** @var PriorityQueue */
     protected $collectors;
 
-    /**
-     * @var EventManagerInterface
-     */
+    /** @var EventManagerInterface */
     protected $eventManager;
 
-    /**
-     * Constructor.
-     *
-     * @param ReportInterface $report
-     */
     public function __construct(ReportInterface $report)
     {
         $this->report = $report;
@@ -105,7 +98,6 @@ class Profiler implements EventManagerAwareInterface
     /**
      * Set the profiler event object.
      *
-     * @param  EventInterface $event
      * @return self
      */
     public function setEvent(EventInterface $event)
@@ -133,12 +125,11 @@ class Profiler implements EventManagerAwareInterface
     /**
      * Set the event manager instance
      *
-     * @param  EventManagerInterface $eventManager
      * @return self
      */
     public function setEventManager(EventManagerInterface $eventManager)
     {
-        $eventManager->addIdentifiers([__CLASS__, get_called_class(), 'profiler']);
+        $eventManager->addIdentifiers([self::class, static::class, 'profiler']);
         $this->eventManager = $eventManager;
 
         return $this;
@@ -185,7 +176,6 @@ class Profiler implements EventManagerAwareInterface
      * Runs all collectors.
      *
      * @triggers ProfilerEvent::EVENT_COLLECTED
-     * @param    MvcEvent $mvcEvent
      * @return   Profiler
      * @throws   Exception\ProfilerException
      */

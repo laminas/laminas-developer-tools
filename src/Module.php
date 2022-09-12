@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools;
 
 use BjyProfiler\Db\Adapter\ProfilingAdapter;
@@ -12,6 +14,14 @@ use Laminas\ModuleManager\Feature\ViewHelperProviderInterface;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManagerInterface;
 
+use function array_map;
+use function define;
+use function defined;
+use function implode;
+use function microtime;
+
+use const PHP_SAPI;
+
 class Module implements
     InitProviderInterface,
     ConfigProviderInterface,
@@ -21,8 +31,6 @@ class Module implements
 {
     /**
      * Initialize workflow
-     *
-     * @param  ModuleManagerInterface $manager
      */
     public function init(ModuleManagerInterface $manager)
     {
@@ -50,7 +58,8 @@ class Module implements
         $eventManager  = $event->getTarget()->getEventManager();
         $configuration = $event->getConfigListener()->getMergedConfig(false);
 
-        if (isset($configuration['laminas-developer-tools']['profiler']['enabled'])
+        if (
+            isset($configuration['laminas-developer-tools']['profiler']['enabled'])
             && $configuration['laminas-developer-tools']['profiler']['enabled'] === true
         ) {
             $eventManager->trigger(ProfilerEvent::EVENT_PROFILER_INIT, $event);
@@ -60,7 +69,6 @@ class Module implements
     /**
      * Laminas\Mvc\MvcEvent::EVENT_BOOTSTRAP event callback
      *
-     * @param  EventInterface $event
      * @throws Exception\InvalidOptionException
      * @throws Exception\ProfilerException
      */
@@ -79,7 +87,7 @@ class Module implements
             return;
         }
 
-        $em  = $app->getEventManager();
+        $em     = $app->getEventManager();
         $report = $sm->get(Report::class);
 
         if ($options->canFlushEarly()) {
@@ -92,7 +100,7 @@ class Module implements
         }
 
         if ($options->eventCollectionEnabled()) {
-            $sem = $em->getSharedManager();
+            $sem                  = $em->getSharedManager();
             $eventLoggingListener = $sm->get(Listener\EventLoggingListenerAggregate::class);
             $eventLoggingListener->attachShared($sem);
         }
@@ -111,20 +119,23 @@ class Module implements
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getConfig()
     {
         return include __DIR__ . '/../config/module.config.php';
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getViewHelperConfig()
     {
         return [
             // Legacy Zend Framework aliases
-            'aliases' => [
-                'ZendDeveloperToolsTime' => 'LaminasDeveloperToolsTime',
-                'ZendDeveloperToolsMemory' => 'LaminasDeveloperToolsMemory',
+            'aliases'    => [
+                'ZendDeveloperToolsTime'        => 'LaminasDeveloperToolsTime',
+                'ZendDeveloperToolsMemory'      => 'LaminasDeveloperToolsMemory',
                 'ZendDeveloperToolsDetailArray' => 'LaminasDeveloperToolsDetailArray',
             ],
             'invokables' => [
@@ -136,33 +147,34 @@ class Module implements
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     public function getServiceConfig()
     {
         return [
-            'aliases' => [
-                'Laminas\DeveloperTools\ReportInterface' => Report::class,
+            'aliases'    => [
+                ReportInterface::class => Report::class,
 
                 // Legacy Zend Framework aliases
-                'ZendDeveloperTools\ReportInterface' => 'Laminas\DeveloperTools\ReportInterface',
-                \ZendDeveloperTools\Report::class => Report::class,
-                'ZendDeveloperTools\ExceptionCollector' => 'Laminas\DeveloperTools\ExceptionCollector',
-                'ZendDeveloperTools\RequestCollector' => 'Laminas\DeveloperTools\RequestCollector',
-                'ZendDeveloperTools\ConfigCollector' => 'Laminas\DeveloperTools\ConfigCollector',
-                'ZendDeveloperTools\MailCollector' => 'Laminas\DeveloperTools\MailCollector',
-                'ZendDeveloperTools\MemoryCollector' => 'Laminas\DeveloperTools\MemoryCollector',
-                'ZendDeveloperTools\TimeCollector' => 'Laminas\DeveloperTools\TimeCollector',
-                'ZendDeveloperTools\FlushListener' => 'Laminas\DeveloperTools\FlushListener',
-                \ZendDeveloperTools\Profiler::class => Profiler::class,
-                'ZendDeveloperTools\Config' => 'Laminas\DeveloperTools\Config',
-                'ZendDeveloperTools\Event' => 'Laminas\DeveloperTools\Event',
-                'ZendDeveloperTools\StorageListener' => 'Laminas\DeveloperTools\StorageListener',
-                \ZendDeveloperTools\Listener\ToolbarListener::class => Listener\ToolbarListener::class,
-                \ZendDeveloperTools\Listener\ProfilerListener::class => Listener\ProfilerListener::class,
-                \ZendDeveloperTools\Listener\EventLoggingListenerAggregate::class
-                    => Listener\EventLoggingListenerAggregate::class,
-                'ZendDeveloperTools\DbCollector' => 'Laminas\DeveloperTools\DbCollector',
+                /** phpcs:disable Generic.Files.LineLength */
+                'ZendDeveloperTools\ReportInterface'                        => ReportInterface::class,
+                'ZendDeveloperTools\Report'                                 => Report::class,
+                'ZendDeveloperTools\ExceptionCollector'                     => 'Laminas\DeveloperTools\ExceptionCollector',
+                'ZendDeveloperTools\RequestCollector'                       => 'Laminas\DeveloperTools\RequestCollector',
+                'ZendDeveloperTools\ConfigCollector'                        => 'Laminas\DeveloperTools\ConfigCollector',
+                'ZendDeveloperTools\MailCollector'                          => 'Laminas\DeveloperTools\MailCollector',
+                'ZendDeveloperTools\MemoryCollector'                        => 'Laminas\DeveloperTools\MemoryCollector',
+                'ZendDeveloperTools\TimeCollector'                          => 'Laminas\DeveloperTools\TimeCollector',
+                'ZendDeveloperTools\FlushListener'                          => 'Laminas\DeveloperTools\FlushListener',
+                'ZendDeveloperTools\Profiler'                               => Profiler::class,
+                'ZendDeveloperTools\Config'                                 => 'Laminas\DeveloperTools\Config',
+                'ZendDeveloperTools\Event'                                  => 'Laminas\DeveloperTools\Event',
+                'ZendDeveloperTools\StorageListener'                        => 'Laminas\DeveloperTools\StorageListener',
+                'ZendDeveloperTools\Listener\ToolbarListener'               => Listener\ToolbarListener::class,
+                'ZendDeveloperTools\Listener\ProfilerListener'              => Listener\ProfilerListener::class,
+                'ZendDeveloperTools\Listener\EventLoggingListenerAggregate' => Listener\EventLoggingListenerAggregate::class,
+                'ZendDeveloperTools\DbCollector'                            => 'Laminas\DeveloperTools\DbCollector',
+                /** phpcs:enable Generic.Files.LineLength */
             ],
             'invokables' => [
                 Report::class                               => Report::class,
@@ -174,35 +186,35 @@ class Module implements
                 'Laminas\DeveloperTools\TimeCollector'      => Collector\TimeCollector::class,
                 'Laminas\DeveloperTools\FlushListener'      => Listener\FlushListener::class,
             ],
-            'factories' => [
-                Profiler::class => function ($sm) {
+            'factories'  => [
+                Profiler::class                               => function ($sm) {
                     $a = new Profiler($sm->get(Report::class));
                     $a->setEvent($sm->get('Laminas\DeveloperTools\Event'));
                     return $a;
                 },
-                'Laminas\DeveloperTools\Config' => function ($sm) {
+                'Laminas\DeveloperTools\Config'               => function ($sm) {
                     $config = $sm->get('Configuration');
-                    $config = isset($config['laminas-developer-tools']) ? $config['laminas-developer-tools'] : null;
+                    $config = $config['laminas-developer-tools'] ?? null;
 
                     return new Options($config, $sm->get(Report::class));
                 },
-                'Laminas\DeveloperTools\Event' => function ($sm) {
+                'Laminas\DeveloperTools\Event'                => function ($sm) {
                     $event = new ProfilerEvent();
                     $event->setReport($sm->get(Report::class));
                     $event->setApplication($sm->get('Application'));
 
                     return $event;
                 },
-                'Laminas\DeveloperTools\StorageListener' => function ($sm) {
+                'Laminas\DeveloperTools\StorageListener'      => function ($sm) {
                     return new Listener\StorageListener($sm);
                 },
-                Listener\ToolbarListener::class => function ($sm) {
+                Listener\ToolbarListener::class               => function ($sm) {
                     return new Listener\ToolbarListener(
                         $sm->get('ViewRenderer'),
                         $sm->get('Laminas\DeveloperTools\Config')
                     );
                 },
-                Listener\ProfilerListener::class => function ($sm) {
+                Listener\ProfilerListener::class              => function ($sm) {
                     return new Listener\ProfilerListener($sm, $sm->get('Laminas\DeveloperTools\Config'));
                 },
                 Listener\EventLoggingListenerAggregate::class => function ($sm) {
@@ -213,7 +225,7 @@ class Module implements
                         $config->getEventIdentifiers()
                     );
                 },
-                'Laminas\DeveloperTools\DbCollector' => function ($sm) {
+                'Laminas\DeveloperTools\DbCollector'          => function ($sm) {
                     $p  = false;
                     $db = new Collector\DbCollector();
 

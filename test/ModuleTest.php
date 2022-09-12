@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\DeveloperTools;
 
 use Laminas\DeveloperTools\Module;
 use PHPUnit\Framework\TestCase;
 
+use function serialize;
+use function unserialize;
+
 class ModuleTest extends TestCase
 {
-    public function testGetConfig()
+    public function testGetConfig(): void
     {
         $module = new Module();
         $config = $module->getConfig();
@@ -15,7 +20,7 @@ class ModuleTest extends TestCase
         $this->assertIsArray($config);
     }
 
-    public function testConfigSerialization()
+    public function testConfigSerialization(): void
     {
         $module = new Module();
         $config = $module->getConfig();

@@ -1,20 +1,18 @@
 <?xml version="1.0"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php" colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         verbose="true"
-         stopOnFailure="false"
-         processIsolation="false"
-         backupGlobals="false">
-    <coverage includeUncoveredFiles="true">
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertDeprecationsToExceptions="true">
+    <testsuites>
+        <testsuite name="laminas-developer-tools Test Suite">
+            <directory>./test</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">./src</directory>
         </include>
     </coverage>
-    <testsuite name="Laminas\DeveloperTools tests suite">
-        <directory>./test</directory>
-    </testsuite>
 </phpunit>

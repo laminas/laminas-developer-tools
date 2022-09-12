@@ -1,23 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\DeveloperTools\Collector;
 
 use BjyProfiler\Db\Profiler\Profiler;
 use Laminas\Mvc\MvcEvent;
 use Serializable;
 
+use function count;
+use function serialize;
+use function unserialize;
+
 /**
  * Database (Laminas\Db) Data Collector.
  */
 class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
 {
-    /**
-     * @var Profiler
-     */
+    /** @var Profiler */
     protected $profiler;
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getName()
     {
@@ -25,7 +29,7 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPriority()
     {
@@ -33,14 +37,14 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function collect(MvcEvent $mvcEvent)
     {
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function canHide()
     {
@@ -78,7 +82,6 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
     /**
      * Sets Bjy's Db Profiler
      *
-     * @param  Profiler $profiler
      * @return self
      */
     public function setProfiler(Profiler $profiler)
@@ -121,6 +124,9 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
         return $time;
     }
 
+    /**
+     * @return string
+     */
     public function __serialize()
     {
         return serialize($this->profiler);
@@ -129,12 +135,18 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
     /**
      * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
      *             {@see Serializable} as alternative
+     *
+     * @inheritDoc
      */
     public function serialize()
     {
         return $this->__serialize();
     }
 
+    /**
+     * @param string $profiler
+     * @return void
+     */
     public function __unserialize($profiler)
     {
         $this->profiler = unserialize($profiler);
@@ -143,6 +155,8 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
     /**
      * @deprecated since 2.3.0, this method will be removed in version 3.0.0 of this component.
      *             {@see Serializable} as alternative
+     *
+     * @inheritDoc
      */
     public function unserialize($profiler)
     {
