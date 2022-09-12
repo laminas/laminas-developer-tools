@@ -386,12 +386,6 @@
       <code>$this-&gt;data['previous']</code>
       <code>$this-&gt;data['trace']</code>
     </MixedReturnStatement>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$data</code>
-    </PropertyNotSetInConstructor>
-    <UndefinedDocblockClass occurrences="1">
-      <code>Exception|Throwable</code>
-    </UndefinedDocblockClass>
   </file>
   <file src="src/Listener/EventLoggingListenerAggregate.php">
     <InvalidPropertyAssignmentValue occurrences="1"/>
@@ -558,7 +552,6 @@
       <code>$config['laminas-developer-tools']</code>
       <code>$configuration['laminas-developer-tools']['profiler']</code>
     </MixedArrayAccess>
-    <MixedArrayOffset occurrences="1"/>
     <MixedAssignment occurrences="16">
       <code>$adapter</code>
       <code>$app</code>
@@ -629,13 +622,8 @@
     <PossiblyNullReference occurrences="1">
       <code>getEventManager</code>
     </PossiblyNullReference>
-    <UndefinedClass occurrences="6">
-      <code>EventLoggingListenerAggregate</code>
-      <code>ProfilerListener</code>
+    <UndefinedClass occurrences="1">
       <code>ProfilingAdapter</code>
-      <code>ToolbarListener</code>
-      <code>\ZendDeveloperTools\Profiler</code>
-      <code>\ZendDeveloperTools\Report</code>
     </UndefinedClass>
     <UndefinedInterfaceMethod occurrences="2">
       <code>getApplication</code>

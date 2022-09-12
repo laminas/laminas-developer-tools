@@ -31,17 +31,18 @@ class SerializableException implements Serializable
     /**
      * Saves the exception data in an array.
      *
-     * @param Exception|Throwable $exception
+     * @param Throwable $exception
      */
     public function __construct($exception)
     {
+        $previous   = $exception->getPrevious();
         $this->data = [
             'code'     => $exception->getCode(),
             'file'     => $exception->getFile(),
             'line'     => $exception->getLine(),
             'class'    => get_class($exception),
             'message'  => $exception->getMessage(),
-            'previous' => $exception->getPrevious() ? new self($exception->getPrevious()) : null,
+            'previous' => $previous !== null ? new self($previous) : null,
             'trace'    => $this->filterTrace(
                 $exception->getTrace(),
                 $exception->getFile(),

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Laminas\DeveloperTools;
 
 use BjyProfiler\Db\Adapter\ProfilingAdapter;
-use Laminas\DeveloperTools\ReportInterface;
 use Laminas\EventManager\EventInterface;
 use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
@@ -14,9 +13,6 @@ use Laminas\ModuleManager\Feature\ServiceProviderInterface;
 use Laminas\ModuleManager\Feature\ViewHelperProviderInterface;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManagerInterface;
-use ZendDeveloperTools\Listener\EventLoggingListenerAggregate;
-use ZendDeveloperTools\Listener\ProfilerListener;
-use ZendDeveloperTools\Listener\ToolbarListener;
 
 use function array_map;
 use function define;
@@ -160,24 +156,25 @@ class Module implements
                 ReportInterface::class => Report::class,
 
                 // Legacy Zend Framework aliases
-                'ZendDeveloperTools\ReportInterface'    => ReportInterface::class,
-                \ZendDeveloperTools\Report::class       => Report::class,
-                'ZendDeveloperTools\ExceptionCollector' => 'Laminas\DeveloperTools\ExceptionCollector',
-                'ZendDeveloperTools\RequestCollector'   => 'Laminas\DeveloperTools\RequestCollector',
-                'ZendDeveloperTools\ConfigCollector'    => 'Laminas\DeveloperTools\ConfigCollector',
-                'ZendDeveloperTools\MailCollector'      => 'Laminas\DeveloperTools\MailCollector',
-                'ZendDeveloperTools\MemoryCollector'    => 'Laminas\DeveloperTools\MemoryCollector',
-                'ZendDeveloperTools\TimeCollector'      => 'Laminas\DeveloperTools\TimeCollector',
-                'ZendDeveloperTools\FlushListener'      => 'Laminas\DeveloperTools\FlushListener',
-                \ZendDeveloperTools\Profiler::class     => Profiler::class,
-                'ZendDeveloperTools\Config'             => 'Laminas\DeveloperTools\Config',
-                'ZendDeveloperTools\Event'              => 'Laminas\DeveloperTools\Event',
-                'ZendDeveloperTools\StorageListener'    => 'Laminas\DeveloperTools\StorageListener',
-                ToolbarListener::class                  => Listener\ToolbarListener::class,
-                ProfilerListener::class                 => Listener\ProfilerListener::class,
-                EventLoggingListenerAggregate::class
-                    => Listener\EventLoggingListenerAggregate::class,
-                'ZendDeveloperTools\DbCollector' => 'Laminas\DeveloperTools\DbCollector',
+                /** phpcs:disable Generic.Files.LineLength */
+                'ZendDeveloperTools\ReportInterface'                        => ReportInterface::class,
+                'ZendDeveloperTools\Report'                                 => Report::class,
+                'ZendDeveloperTools\ExceptionCollector'                     => 'Laminas\DeveloperTools\ExceptionCollector',
+                'ZendDeveloperTools\RequestCollector'                       => 'Laminas\DeveloperTools\RequestCollector',
+                'ZendDeveloperTools\ConfigCollector'                        => 'Laminas\DeveloperTools\ConfigCollector',
+                'ZendDeveloperTools\MailCollector'                          => 'Laminas\DeveloperTools\MailCollector',
+                'ZendDeveloperTools\MemoryCollector'                        => 'Laminas\DeveloperTools\MemoryCollector',
+                'ZendDeveloperTools\TimeCollector'                          => 'Laminas\DeveloperTools\TimeCollector',
+                'ZendDeveloperTools\FlushListener'                          => 'Laminas\DeveloperTools\FlushListener',
+                'ZendDeveloperTools\Profiler'                               => Profiler::class,
+                'ZendDeveloperTools\Config'                                 => 'Laminas\DeveloperTools\Config',
+                'ZendDeveloperTools\Event'                                  => 'Laminas\DeveloperTools\Event',
+                'ZendDeveloperTools\StorageListener'                        => 'Laminas\DeveloperTools\StorageListener',
+                'ZendDeveloperTools\Listener\ToolbarListener'               => Listener\ToolbarListener::class,
+                'ZendDeveloperTools\Listener\ProfilerListener'              => Listener\ProfilerListener::class,
+                'ZendDeveloperTools\Listener\EventLoggingListenerAggregate' => Listener\EventLoggingListenerAggregate::class,
+                'ZendDeveloperTools\DbCollector'                            => 'Laminas\DeveloperTools\DbCollector',
+                /** phpcs:enable Generic.Files.LineLength */
             ],
             'invokables' => [
                 Report::class                               => Report::class,
