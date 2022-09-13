@@ -50,7 +50,7 @@ class RequestCollector extends AbstractCollector
         $match     = $mvcEvent->getRouteMatch();
         $viewModel = $mvcEvent->getViewModel();
 
-        $addToViewFromModel = function (ModelInterface $child) use (&$views) {
+        $addToViewFromModel = static function (ModelInterface $child) use (&$views): void {
             $vars = $child->getVariables();
 
             if ($vars instanceof Variables) {
@@ -79,9 +79,11 @@ class RequestCollector extends AbstractCollector
             'route'                  => $match === null ? 'N/A' : $match->getMatchedRouteName(),
             'action'                 => $match === null ? 'N/A' : $match->getParam('action', 'N/A'),
             'controller'             => $match === null ? 'N/A' : $match->getParam('controller', 'N/A'),
-            'other_route_parameters' => $match === null ? 'N/A' : array_filter($match->getParams(), function ($key) {
-                return ! in_array($key, ['action', 'controller']);
-            }, ARRAY_FILTER_USE_KEY),
+            'other_route_parameters' => $match === null ? 'N/A' : array_filter(
+                $match->getParams(),
+                static fn($key) => ! in_array($key, ['action', 'controller']),
+                ARRAY_FILTER_USE_KEY
+            ),
         ];
     }
 

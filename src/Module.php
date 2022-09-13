@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace Laminas\DeveloperTools;
 
 use BjyProfiler\Db\Adapter\ProfilingAdapter;
+use Laminas\DeveloperTools\Collector\DbCollector;
+use Laminas\DeveloperTools\Listener\EventLoggingListenerAggregate;
+use Laminas\DeveloperTools\Options;
+use Laminas\DeveloperTools\Profiler;
+use Laminas\DeveloperTools\ProfilerEvent;
 use Laminas\EventManager\EventInterface;
 use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
@@ -101,7 +106,7 @@ class Module implements
 
         if ($options->eventCollectionEnabled()) {
             $sem                  = $em->getSharedManager();
-            $eventLoggingListener = $sm->get(Listener\EventLoggingListenerAggregate::class);
+            $eventLoggingListener = $sm->get(EventLoggingListenerAggregate::class);
             $eventLoggingListener->attachShared($sem);
         }
 
@@ -172,7 +177,7 @@ class Module implements
                 'ZendDeveloperTools\StorageListener'                        => 'Laminas\DeveloperTools\StorageListener',
                 'ZendDeveloperTools\Listener\ToolbarListener'               => Listener\ToolbarListener::class,
                 'ZendDeveloperTools\Listener\ProfilerListener'              => Listener\ProfilerListener::class,
-                'ZendDeveloperTools\Listener\EventLoggingListenerAggregate' => Listener\EventLoggingListenerAggregate::class,
+                'ZendDeveloperTools\Listener\EventLoggingListenerAggregate' => EventLoggingListenerAggregate::class,
                 'ZendDeveloperTools\DbCollector'                            => 'Laminas\DeveloperTools\DbCollector',
                 /** phpcs:enable Generic.Files.LineLength */
             ],
@@ -187,47 +192,41 @@ class Module implements
                 'Laminas\DeveloperTools\FlushListener'      => Listener\FlushListener::class,
             ],
             'factories'  => [
-                Profiler::class                               => function ($sm) {
+                Profiler::class                          => static function ($sm): Profiler {
                     $a = new Profiler($sm->get(Report::class));
                     $a->setEvent($sm->get('Laminas\DeveloperTools\Event'));
                     return $a;
                 },
-                'Laminas\DeveloperTools\Config'               => function ($sm) {
+                'Laminas\DeveloperTools\Config'          => static function ($sm): Options {
                     $config = $sm->get('Configuration');
                     $config = $config['laminas-developer-tools'] ?? null;
-
                     return new Options($config, $sm->get(Report::class));
                 },
-                'Laminas\DeveloperTools\Event'                => function ($sm) {
+                'Laminas\DeveloperTools\Event'           => static function ($sm): ProfilerEvent {
                     $event = new ProfilerEvent();
                     $event->setReport($sm->get(Report::class));
                     $event->setApplication($sm->get('Application'));
-
                     return $event;
                 },
-                'Laminas\DeveloperTools\StorageListener'      => function ($sm) {
-                    return new Listener\StorageListener($sm);
-                },
-                Listener\ToolbarListener::class               => function ($sm) {
-                    return new Listener\ToolbarListener(
-                        $sm->get('ViewRenderer'),
-                        $sm->get('Laminas\DeveloperTools\Config')
-                    );
-                },
-                Listener\ProfilerListener::class              => function ($sm) {
-                    return new Listener\ProfilerListener($sm, $sm->get('Laminas\DeveloperTools\Config'));
-                },
-                Listener\EventLoggingListenerAggregate::class => function ($sm) {
+                'Laminas\DeveloperTools\StorageListener' => static fn($sm) => new Listener\StorageListener($sm),
+                Listener\ToolbarListener::class          => static fn($sm) => new Listener\ToolbarListener(
+                    $sm->get('ViewRenderer'),
+                    $sm->get('Laminas\DeveloperTools\Config')
+                ),
+                Listener\ProfilerListener::class         => static fn($sm) => new Listener\ProfilerListener(
+                    $sm,
+                    $sm->get('Laminas\DeveloperTools\Config')
+                ),
+                EventLoggingListenerAggregate::class     => static function ($sm): EventLoggingListenerAggregate {
                     $config = $sm->get('Laminas\DeveloperTools\Config');
-
-                    return new Listener\EventLoggingListenerAggregate(
+                    return new EventLoggingListenerAggregate(
                         array_map([$sm, 'get'], $config->getEventCollectors()),
                         $config->getEventIdentifiers()
                     );
                 },
-                'Laminas\DeveloperTools\DbCollector'          => function ($sm) {
+                'Laminas\DeveloperTools\DbCollector'     => static function ($sm) {
                     $p  = false;
-                    $db = new Collector\DbCollector();
+                    $db = new DbCollector();
 
                     if ($sm->has('Laminas\Db\Adapter\Adapter') && isset($sm->get('config')['db'])) {
                         $adapter = $sm->get('Laminas\Db\Adapter\Adapter');

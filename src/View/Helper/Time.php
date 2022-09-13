@@ -31,6 +31,6 @@ class Time extends AbstractHelper
             return sprintf('%.' . $precision . 'f ms', $time * 1000);
         }
 
-        return sprintf('%.' . $precision . 'f µs', $time * 1000000);
+        return sprintf('%.' . $precision . 'f µs', $time * 1_000_000);
     }
 }

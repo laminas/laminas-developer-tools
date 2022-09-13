@@ -166,7 +166,7 @@ class ConfigCollector implements CollectorInterface, Serializable
             }
 
             if ($value instanceof ClosureStub) {
-                $unserialized[$key] = function () {
+                $unserialized[$key] = static function (): void {
                 };
                 continue;
             }

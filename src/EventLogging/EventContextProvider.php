@@ -28,8 +28,7 @@ class EventContextProvider implements EventContextInterface
     /** @var EventInterface */
     protected $event;
 
-    /** @var array */
-    private $debugBacktrace = [];
+    private array $debugBacktrace = [];
 
     /**
      * @param EventInterface|null $event (Optional) The event to provide context to.

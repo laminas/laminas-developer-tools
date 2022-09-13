@@ -523,7 +523,7 @@
       <code>$sm</code>
     </MissingClosureParamType>
     <MissingClosureReturnType occurrences="1">
-      <code>function ($sm) {</code>
+      <code>static function ($sm) {</code>
     </MissingClosureReturnType>
     <MissingReturnType occurrences="1">
       <code>onLoadModulesPost</code>
