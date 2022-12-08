@@ -12,7 +12,6 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Stdlib\PriorityQueue;
 
-use function get_class;
 use function sprintf;
 use function uniqid;
 
@@ -163,7 +162,7 @@ class Profiler implements EventManagerAwareInterface
             return $this;
         }
 
-        $error = sprintf('%s must implement CollectorInterface.', get_class($collector));
+        $error = sprintf('%s must implement CollectorInterface.', $collector::class);
         if ($this->strict === true) {
             throw new Exception\CollectorException($error);
         }

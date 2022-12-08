@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.27.0@faf106e717c37b8c81721845dba9de3d8deed8ff">
+<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
   <file src="src/Collector/AbstractCollector.php">
     <MissingConstructor occurrences="5">
       <code>$data</code>
@@ -21,9 +21,6 @@
     <DocblockTypeContradiction occurrences="1">
       <code>! $application = $mvcEvent-&gt;getApplication()</code>
     </DocblockTypeContradiction>
-    <MissingClosureReturnType occurrences="1">
-      <code>function () {</code>
-    </MissingClosureReturnType>
     <MissingReturnType occurrences="1">
       <code>collect</code>
     </MissingReturnType>
@@ -35,8 +32,14 @@
       <code>$data['applicationConfig']</code>
       <code>$data['config']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="7">
+    <MixedArrayOffset occurrences="3">
+      <code>$serializable[$key]</code>
+      <code>$serializable[$key]</code>
+      <code>$serializable[$key]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="8">
       <code>$data</code>
+      <code>$key</code>
       <code>$serializable[$key]</code>
       <code>$this-&gt;applicationConfig</code>
       <code>$this-&gt;config</code>
@@ -215,9 +218,6 @@
     </RedundantPropertyInitializationCheck>
   </file>
   <file src="src/Collector/RequestCollector.php">
-    <MissingClosureReturnType occurrences="1">
-      <code>function (ModelInterface $child) use (&amp;$views) {</code>
-    </MissingClosureReturnType>
     <MissingReturnType occurrences="2">
       <code>addChildrenToView</code>
       <code>collect</code>
@@ -389,7 +389,9 @@
   </file>
   <file src="src/Listener/EventLoggingListenerAggregate.php">
     <InvalidPropertyAssignmentValue occurrences="1"/>
-    <PossiblyInvalidArgument occurrences="1"/>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>static fn(CollectorInterface $collector) =&gt; $collector</code>
+    </PossiblyInvalidArgument>
     <RedundantCastGivenDocblockType occurrences="1">
       <code>(string) $identifier</code>
     </RedundantCastGivenDocblockType>
@@ -548,9 +550,10 @@
     <MixedArgumentTypeCoercion occurrences="1">
       <code>array_map([$sm, 'get'], $config-&gt;getEventCollectors())</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="2">
+    <MixedArrayAccess occurrences="3">
       <code>$config['laminas-developer-tools']</code>
       <code>$configuration['laminas-developer-tools']['profiler']</code>
+      <code>$configuration['laminas-developer-tools']['profiler']['enabled']</code>
     </MixedArrayAccess>
     <MixedAssignment occurrences="16">
       <code>$adapter</code>
@@ -667,13 +670,12 @@
       <code>$this-&gt;toolbar[$key][$collector]</code>
       <code>$this-&gt;toolbar[$key][$collector]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="7">
+    <MixedAssignment occurrences="6">
       <code>$collector</code>
       <code>$collector</code>
       <code>$collector</code>
       <code>$identifier</code>
       <code>$template</code>
-      <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="12">
@@ -707,9 +709,9 @@
     <MixedStringOffsetAssignment occurrences="1">
       <code>$this-&gt;toolbar[$key][$collector]</code>
     </MixedStringOffsetAssignment>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$report</code>
-    </PropertyNotSetInConstructor>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$options</code>
+    </PossiblyInvalidArgument>
     <TypeDoesNotContainType occurrences="2">
       <code>is_array($options)</code>
       <code>is_array($options)</code>

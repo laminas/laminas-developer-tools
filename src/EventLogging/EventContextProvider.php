@@ -12,7 +12,6 @@ use function basename;
 use function debug_backtrace;
 use function dirname;
 use function file_exists;
-use function get_class;
 use function get_resource_type;
 use function gettype;
 use function is_object;
@@ -90,7 +89,7 @@ class EventContextProvider implements EventContextInterface
     private function getEventTargetAsString($target)
     {
         if (is_object($target)) {
-            return get_class($target);
+            return $target::class;
         }
 
         if (is_resource($target)) {
