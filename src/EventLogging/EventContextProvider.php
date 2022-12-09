@@ -83,10 +83,9 @@ class EventContextProvider implements EventContextInterface
     /**
      * Determines a string label to represent an event target.
      *
-     * @param mixed $target
      * @return string
      */
-    private function getEventTargetAsString($target)
+    private function getEventTargetAsString(mixed $target)
     {
         if (is_object($target)) {
             return $target::class;

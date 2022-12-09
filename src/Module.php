@@ -7,6 +7,9 @@ namespace Laminas\DeveloperTools;
 use BjyProfiler\Db\Adapter\ProfilingAdapter;
 use Laminas\DeveloperTools\Collector\DbCollector;
 use Laminas\DeveloperTools\Listener\EventLoggingListenerAggregate;
+use Laminas\DeveloperTools\Listener\ProfilerListener;
+use Laminas\DeveloperTools\Listener\StorageListener;
+use Laminas\DeveloperTools\Listener\ToolbarListener;
 use Laminas\DeveloperTools\Options;
 use Laminas\DeveloperTools\Profiler;
 use Laminas\DeveloperTools\ProfilerEvent;
@@ -110,11 +113,11 @@ class Module implements
             $eventLoggingListener->attachShared($sem);
         }
 
-        $profilerListener = $sm->get(Listener\ProfilerListener::class);
+        $profilerListener = $sm->get(ProfilerListener::class);
         $profilerListener->attach($em);
 
         if ($options->isToolbarEnabled()) {
-            $toolbarListener = $sm->get(Listener\ToolbarListener::class);
+            $toolbarListener = $sm->get(ToolbarListener::class);
             $toolbarListener->attach($em);
         }
 
@@ -175,8 +178,8 @@ class Module implements
                 'ZendDeveloperTools\Config'                                 => 'Laminas\DeveloperTools\Config',
                 'ZendDeveloperTools\Event'                                  => 'Laminas\DeveloperTools\Event',
                 'ZendDeveloperTools\StorageListener'                        => 'Laminas\DeveloperTools\StorageListener',
-                'ZendDeveloperTools\Listener\ToolbarListener'               => Listener\ToolbarListener::class,
-                'ZendDeveloperTools\Listener\ProfilerListener'              => Listener\ProfilerListener::class,
+                'ZendDeveloperTools\Listener\ToolbarListener'               => ToolbarListener::class,
+                'ZendDeveloperTools\Listener\ProfilerListener'              => ProfilerListener::class,
                 'ZendDeveloperTools\Listener\EventLoggingListenerAggregate' => EventLoggingListenerAggregate::class,
                 'ZendDeveloperTools\DbCollector'                            => 'Laminas\DeveloperTools\DbCollector',
                 /** phpcs:enable Generic.Files.LineLength */
@@ -208,12 +211,12 @@ class Module implements
                     $event->setApplication($sm->get('Application'));
                     return $event;
                 },
-                'Laminas\DeveloperTools\StorageListener' => static fn($sm) => new Listener\StorageListener($sm),
-                Listener\ToolbarListener::class          => static fn($sm) => new Listener\ToolbarListener(
+                'Laminas\DeveloperTools\StorageListener' => static fn($sm): StorageListener => new StorageListener($sm),
+                ToolbarListener::class                   => static fn($sm): ToolbarListener => new ToolbarListener(
                     $sm->get('ViewRenderer'),
                     $sm->get('Laminas\DeveloperTools\Config')
                 ),
-                Listener\ProfilerListener::class         => static fn($sm) => new Listener\ProfilerListener(
+                ProfilerListener::class                  => static fn($sm): ProfilerListener => new ProfilerListener(
                     $sm,
                     $sm->get('Laminas\DeveloperTools\Config')
                 ),

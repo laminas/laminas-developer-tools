@@ -27,9 +27,9 @@ use function phpversion;
 use function preg_match;
 use function preg_replace;
 use function sprintf;
+use function str_contains;
 use function str_replace;
 use function stripos;
-use function strpos;
 use function time;
 
 /**
@@ -53,19 +53,15 @@ class ToolbarListener implements ListenerAggregateInterface
      */
     public const DOC_URI = 'https://docs.laminas.dev/';
 
-    /** @var object */
-    protected $renderer;
-
     /** @var Options */
     protected $options;
 
     /**
-     * @param object  $viewRenderer
+     * @param object $renderer
      */
-    public function __construct($viewRenderer, Options $options)
+    public function __construct(protected $renderer, Options $options)
     {
-        $this->options  = $options;
-        $this->renderer = $viewRenderer;
+        $this->options = $options;
     }
 
     /**
@@ -97,7 +93,7 @@ class ToolbarListener implements ListenerAggregateInterface
         $headers  = $response->getHeaders();
         if (
             $headers->has('Content-Type')
-            && false === strpos($headers->get('Content-Type')->getFieldValue(), 'html')
+            && ! str_contains($headers->get('Content-Type')->getFieldValue(), 'html')
         ) {
             return;
         }
@@ -152,9 +148,7 @@ class ToolbarListener implements ListenerAggregateInterface
         } else {
             $injected = $isHtml5
                 ? (
-                    stripos($content, '</html>') !== false
-                        ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $content, 1)
-                        : '<!doctype html>' . $content . $style . $toolbar . $script
+                    stripos($content, '</html>') !== false ? preg_replace('/<\/html>/i', $style . $toolbar . $script . "\n</html>", $content, 1) : '<!doctype html>' . $content . $style . $toolbar . $script
                 )
                 : $content;
         }
@@ -204,7 +198,7 @@ class ToolbarListener implements ListenerAggregateInterface
                     ]);
                     $collector->setTemplate($template);
                     $entries[] = $this->renderer->render($collector);
-                } catch (RuntimeException $e) {
+                } catch (RuntimeException) {
                     $errors[$name] = $template;
                 }
             }

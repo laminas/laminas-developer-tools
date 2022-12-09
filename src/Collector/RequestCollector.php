@@ -11,9 +11,8 @@ use Laminas\View\Variables;
 use function array_filter;
 use function array_pop;
 use function explode;
-use function gettype;
+use function get_debug_type;
 use function in_array;
-use function is_object;
 use function sort;
 use function sprintf;
 
@@ -58,7 +57,7 @@ class RequestCollector extends AbstractCollector
             $vars = (array) $vars;
 
             foreach ($vars as $key => &$var) {
-                $var = $key . ': ' . (is_object($var) ? $var::class : gettype($var));
+                $var = $key . ': ' . get_debug_type($var);
             }
             sort($vars);
 
@@ -80,7 +79,7 @@ class RequestCollector extends AbstractCollector
             'controller'             => $match === null ? 'N/A' : $match->getParam('controller', 'N/A'),
             'other_route_parameters' => $match === null ? 'N/A' : array_filter(
                 $match->getParams(),
-                static fn($key) => ! in_array($key, ['action', 'controller']),
+                static fn($key): bool => ! in_array($key, ['action', 'controller']),
                 ARRAY_FILTER_USE_KEY
             ),
         ];

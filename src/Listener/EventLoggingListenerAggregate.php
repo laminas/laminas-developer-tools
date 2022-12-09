@@ -38,7 +38,7 @@ class EventLoggingListenerAggregate
             $collectors
         );
         $this->identifiers = array_values(array_map(
-            static fn($identifier) => (string) $identifier,
+            static fn($identifier): string => (string) $identifier,
             $identifiers
         ));
     }
