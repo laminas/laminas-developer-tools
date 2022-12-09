@@ -11,7 +11,6 @@ use Laminas\View\Variables;
 use function array_filter;
 use function array_pop;
 use function explode;
-use function get_class;
 use function gettype;
 use function in_array;
 use function is_object;
@@ -59,7 +58,7 @@ class RequestCollector extends AbstractCollector
             $vars = (array) $vars;
 
             foreach ($vars as $key => &$var) {
-                $var = $key . ': ' . (is_object($var) ? get_class($var) : gettype($var));
+                $var = $key . ': ' . (is_object($var) ? $var::class : gettype($var));
             }
             sort($vars);
 

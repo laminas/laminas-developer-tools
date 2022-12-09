@@ -9,7 +9,6 @@ use Throwable;
 
 use function array_pop;
 use function explode;
-use function get_class;
 use function get_resource_type;
 use function implode;
 use function is_array;
@@ -40,7 +39,7 @@ class SerializableException implements Serializable
             'code'     => $exception->getCode(),
             'file'     => $exception->getFile(),
             'line'     => $exception->getLine(),
-            'class'    => get_class($exception),
+            'class'    => $exception::class,
             'message'  => $exception->getMessage(),
             'previous' => $previous !== null ? new self($previous) : null,
             'trace'    => $this->filterTrace(
@@ -168,7 +167,7 @@ class SerializableException implements Serializable
 
         foreach ($args as $key => $value) {
             if (is_object($value)) {
-                $result[$key] = ['object', get_class($value)];
+                $result[$key] = ['object', $value::class];
                 continue;
             }
 
