@@ -80,8 +80,6 @@ class Options extends AbstractOptions
 
     /**
      * Sets Profiler options.
-     *
-     * @param array $options
      */
     public function setProfiler(array $options)
     {
@@ -112,8 +110,6 @@ class Options extends AbstractOptions
 
     /**
      * Sets Event-level profiling options.
-     *
-     * @param array $options
      */
     public function setEvents(array $options)
     {
@@ -185,8 +181,6 @@ class Options extends AbstractOptions
 
     /**
      * Sets Event-level collectors.
-     *
-     * @param array $options
      */
     public function setEventCollectors(array $options)
     {
@@ -211,8 +205,6 @@ class Options extends AbstractOptions
     /**
      * Set Event-level collectors to listen to certain event identifiers. Defaults to '*' which causes the listener to
      * attach to all events.
-     *
-     * @param array $options
      */
     public function setEventIdentifiers(array $options)
     {
@@ -314,8 +306,6 @@ class Options extends AbstractOptions
 
     /**
      * Sets Toolbar options.
-     *
-     * @param array $options
      */
     public function setToolbar(array $options)
     {
