@@ -778,10 +778,6 @@
       <code>$this-&gt;getParam('profiler')</code>
       <code>$this-&gt;getParam('report')</code>
     </MixedReturnStatement>
-    <PropertyNotSetInConstructor occurrences="2">
-      <code>ProfilerEvent</code>
-      <code>ProfilerEvent</code>
-    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Report.php">
     <MissingConstructor occurrences="6">
