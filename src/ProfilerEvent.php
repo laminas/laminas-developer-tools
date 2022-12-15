@@ -7,6 +7,7 @@ namespace Laminas\DeveloperTools;
 use Laminas\EventManager\Event;
 use Laminas\Mvc\ApplicationInterface;
 
+/** @template-extends Event<null, ApplicationInterface|Profiler|ReportInterface> */
 class ProfilerEvent extends Event
 {
     /**
