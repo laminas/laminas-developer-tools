@@ -39,13 +39,13 @@
         "laminas/laminas-servicemanager": "^3.3",
         "laminas/laminas-stdlib": "^3.6",
         "laminas/laminas-view": "^2.13.1",
-        "symfony/var-dumper": "^5.0.1 || ^6.0"
+        "symfony/var-dumper": "^6.0 || ^7.0"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.5.0",
         "phpunit/phpunit": "^9.5.26",
         "psalm/plugin-phpunit": "^0.18.4",
-        "vimeo/psalm": "^5.1"
+        "vimeo/psalm": "^5.16"
     },
     "suggest": {
         "aist/aist-git-tools": "Show you information about current GIT repository",

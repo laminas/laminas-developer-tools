@@ -6,12 +6,14 @@ namespace Laminas\DeveloperTools;
 
 use DateTime;
 use DateTimeZone;
+use Laminas\DeveloperTools\Collector\CollectorInterface;
 use Laminas\EventManager\EventInterface;
 use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Stdlib\PriorityQueue;
 
+use function assert;
 use function sprintf;
 use function uniqid;
 
@@ -147,7 +149,7 @@ class Profiler implements EventManagerAwareInterface
     /**
      * Adds a collector.
      *
-     * @param  Collector\CollectorInterface $collector
+     * @param  CollectorInterface $collector
      * @return self
      * @throws Exception\CollectorException
      */
@@ -188,6 +190,7 @@ class Profiler implements EventManagerAwareInterface
 
         if (isset($this->collectors)) {
             foreach ($this->collectors as $collector) {
+                assert($collector instanceof CollectorInterface);
                 $collector->collect($mvcEvent);
                 $this->report->addCollector($collector);
             }
