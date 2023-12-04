@@ -115,6 +115,7 @@ class ToolbarListener implements ListenerAggregateInterface
 
         $toolbarView = new ViewModel(['entries' => $entries]);
         $toolbarView->setTemplate('laminas-developer-tools/toolbar/toolbar');
+        /** @var string $toolbar */
         $toolbar = $this->renderer->render($toolbarView);
 
         $toolbarCss = new ViewModel([
