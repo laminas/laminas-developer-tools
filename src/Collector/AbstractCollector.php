@@ -6,6 +6,8 @@ namespace Laminas\DeveloperTools\Collector;
 
 use Serializable;
 
+use function assert;
+use function is_array;
 use function serialize;
 use function unserialize;
 
@@ -22,11 +24,11 @@ abstract class AbstractCollector implements CollectorInterface, Serializable
     protected $data;
 
     /**
-     * @return string
+     * @return array
      */
     public function __serialize()
     {
-        return serialize($this->data);
+        return ['data' => $this->data];
     }
 
     /**
@@ -37,16 +39,17 @@ abstract class AbstractCollector implements CollectorInterface, Serializable
      */
     public function serialize()
     {
-        return $this->__serialize();
+        return serialize($this->__serialize());
     }
 
     /**
-     * @param string $data
+     * @param array $data
      * @return void
      */
     public function __unserialize($data)
     {
-        $this->data = unserialize($data);
+        assert(isset($data['data']) && is_array($data['data']));
+        $this->data = $data['data'];
     }
 
     /**
@@ -57,6 +60,8 @@ abstract class AbstractCollector implements CollectorInterface, Serializable
      */
     public function unserialize($data)
     {
+        $data = unserialize($data);
+        assert(is_array($data));
         $this->__unserialize($data);
     }
 }

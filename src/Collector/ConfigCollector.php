@@ -11,6 +11,8 @@ use Laminas\Stdlib\ArrayUtils;
 use Serializable;
 use Traversable;
 
+use function array_key_exists;
+use function assert;
 use function is_array;
 use function serialize;
 use function unserialize;
@@ -82,11 +84,11 @@ class ConfigCollector implements CollectorInterface, Serializable
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function __serialize()
     {
-        return serialize(['config' => $this->config, 'applicationConfig' => $this->applicationConfig]);
+        return ['config' => $this->config, 'applicationConfig' => $this->applicationConfig];
     }
 
     /**
@@ -97,16 +99,19 @@ class ConfigCollector implements CollectorInterface, Serializable
      */
     public function serialize()
     {
-        return $this->__serialize();
+        return serialize($this->__serialize());
     }
 
     /**
-     * @param string $serialized
+     * @param array $data
      * @return void
      */
-    public function __unserialize($serialized)
+    public function __unserialize($data)
     {
-        $data                    = unserialize($serialized);
+        assert(array_key_exists('config', $data));
+        assert($data['config'] === null || is_array($data['config']));
+        assert(array_key_exists('applicationConfig', $data));
+        assert($data['applicationConfig'] === null || is_array($data['applicationConfig']));
         $this->config            = $data['config'];
         $this->applicationConfig = $data['applicationConfig'];
     }
@@ -119,7 +124,9 @@ class ConfigCollector implements CollectorInterface, Serializable
      */
     public function unserialize($serialized)
     {
-        $this->__unserialize($serialized);
+        $data = unserialize($serialized);
+        assert(is_array($data));
+        $this->__unserialize($data);
     }
 
     /**
