@@ -6,6 +6,7 @@ namespace Laminas\DeveloperTools;
 
 use Laminas\Stdlib\AbstractOptions;
 use Laminas\Stdlib\Exception\InvalidArgumentException;
+use Traversable;
 
 use function gettype;
 use function is_array;

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
   <file src="src/Collector/AbstractCollector.php">
+    <MethodSignatureMustProvideReturnType>
+      <code>serialize</code>
+      <code>unserialize</code>
+    </MethodSignatureMustProvideReturnType>
     <MissingConstructor>
       <code>$data</code>
       <code>$data</code>
@@ -9,7 +13,7 @@
       <code>$data</code>
     </MissingConstructor>
     <MixedAssignment>
-      <code><![CDATA[$this->data]]></code>
+      <code>$data</code>
     </MixedAssignment>
   </file>
   <file src="src/Collector/CollectorInterface.php">
@@ -21,6 +25,10 @@
     <DocblockTypeContradiction>
       <code><![CDATA[! $application = $mvcEvent->getApplication()]]></code>
     </DocblockTypeContradiction>
+    <MethodSignatureMustProvideReturnType>
+      <code>serialize</code>
+      <code>unserialize</code>
+    </MethodSignatureMustProvideReturnType>
     <MissingReturnType>
       <code>collect</code>
     </MissingReturnType>
@@ -28,21 +36,14 @@
       <code><![CDATA[$serviceLocator->get('ApplicationConfig')]]></code>
       <code><![CDATA[$serviceLocator->get('config')]]></code>
     </MixedArgument>
-    <MixedArrayAccess>
-      <code><![CDATA[$data['applicationConfig']]]></code>
-      <code><![CDATA[$data['config']]]></code>
-    </MixedArrayAccess>
     <MixedArrayOffset>
       <code>$serializable[$key]</code>
       <code>$serializable[$key]</code>
       <code>$serializable[$key]</code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$data</code>
       <code>$key</code>
       <code>$serializable[$key]</code>
-      <code><![CDATA[$this->applicationConfig]]></code>
-      <code><![CDATA[$this->config]]></code>
       <code>$unserialized[$key]</code>
       <code>$value</code>
       <code>$value</code>
@@ -58,21 +59,12 @@
     <PossiblyInvalidArgument>
       <code>$value</code>
     </PossiblyInvalidArgument>
-    <PossiblyUnusedMethod>
-      <code>getApplicationConfig</code>
-      <code>getConfig</code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Collector/DbCollector.php">
-    <InvalidReturnStatement>
-      <code><![CDATA[count($this->profiler->getQueryProfiles($mode))]]></code>
-    </InvalidReturnStatement>
-    <InvalidReturnType>
-      <code>self</code>
-    </InvalidReturnType>
-    <MissingConstructor>
-      <code>$profiler</code>
-    </MissingConstructor>
+    <MethodSignatureMustProvideReturnType>
+      <code>serialize</code>
+      <code>unserialize</code>
+    </MethodSignatureMustProvideReturnType>
     <MissingReturnType>
       <code>collect</code>
     </MissingReturnType>
@@ -81,7 +73,6 @@
     </MixedArgument>
     <MixedAssignment>
       <code>$query</code>
-      <code><![CDATA[$this->profiler]]></code>
       <code>$time</code>
     </MixedAssignment>
     <MixedInferredReturnType>
@@ -97,6 +88,9 @@
     <MixedReturnStatement>
       <code>$time</code>
     </MixedReturnStatement>
+    <PossiblyNullReference>
+      <code>getQueryProfiles</code>
+    </PossiblyNullReference>
     <PossiblyUnusedMethod>
       <code>getProfiler</code>
       <code>getQueryTime</code>
@@ -106,17 +100,15 @@
     <PossiblyUnusedParam>
       <code>$profiler</code>
     </PossiblyUnusedParam>
-    <RedundantPropertyInitializationCheck>
-      <code><![CDATA[isset($this->profiler)]]></code>
-    </RedundantPropertyInitializationCheck>
     <UndefinedClass>
+      <code>Profiler</code>
       <code>Profiler</code>
     </UndefinedClass>
     <UndefinedDocblockClass>
       <code><![CDATA[$this->profiler]]></code>
       <code><![CDATA[$this->profiler]]></code>
-      <code>Profiler</code>
-      <code>Profiler</code>
+      <code>null|Profiler</code>
+      <code>null|Profiler</code>
     </UndefinedDocblockClass>
   </file>
   <file src="src/Collector/EventCollectorInterface.php">
@@ -257,7 +249,6 @@
       <code>collect</code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$child</code>
       <code>$controller</code>
       <code>$controller</code>
       <code><![CDATA[$this->data['action']]]></code>
@@ -266,7 +257,6 @@
       <code>$views[]</code>
     </MixedArrayAssignment>
     <MixedAssignment>
-      <code>$child</code>
       <code>$controller</code>
       <code>$var</code>
     </MixedAssignment>
@@ -406,6 +396,10 @@
     </UnusedClass>
   </file>
   <file src="src/Exception/SerializableException.php">
+    <MethodSignatureMustProvideReturnType>
+      <code>serialize</code>
+      <code>unserialize</code>
+    </MethodSignatureMustProvideReturnType>
     <MixedArgument>
       <code><![CDATA[$entry['args']]]></code>
       <code><![CDATA[$entry['class']]]></code>
@@ -734,6 +728,9 @@
       <code>setProfiler</code>
       <code>setToolbar</code>
     </MissingReturnType>
+    <MissingTemplateParam>
+      <code>Options</code>
+    </MissingTemplateParam>
     <MixedArgument>
       <code><![CDATA[$options['collectors']]]></code>
       <code><![CDATA[$options['identifiers']]]></code>
@@ -741,6 +738,9 @@
       <code>$value</code>
       <code>$value</code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code>$options</code>
+    </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
       <code><![CDATA[$this->events['collectors'][$name]]]></code>
       <code><![CDATA[$this->events['identifiers'][$name]]]></code>
@@ -796,9 +796,6 @@
     <MixedStringOffsetAssignment>
       <code><![CDATA[$this->toolbar[$key][$collector]]]></code>
     </MixedStringOffsetAssignment>
-    <PossiblyInvalidArgument>
-      <code>$options</code>
-    </PossiblyInvalidArgument>
     <PossiblyUnusedMethod>
       <code>canFlushEarly</code>
       <code>eventCollectionEnabled</code>
@@ -807,10 +804,6 @@
       <code>setEvents</code>
       <code>setProfiler</code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedParam>
-      <code>$options</code>
-      <code>$report</code>
-    </PossiblyUnusedParam>
     <TypeDoesNotContainType>
       <code>is_array($options)</code>
       <code>is_array($options)</code>
@@ -825,9 +818,6 @@
       <code>TimeCollector</code>
       <code>TimeCollector</code>
     </UndefinedClass>
-    <UndefinedDocblockClass>
-      <code>array|Traversable|null</code>
-    </UndefinedDocblockClass>
   </file>
   <file src="src/Profiler.php">
     <ImplementedReturnTypeMismatch>

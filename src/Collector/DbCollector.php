@@ -8,7 +8,10 @@ use BjyProfiler\Db\Profiler\Profiler;
 use Laminas\Mvc\MvcEvent;
 use Serializable;
 
+use function array_key_exists;
+use function assert;
 use function count;
+use function is_array;
 use function serialize;
 use function unserialize;
 
@@ -17,7 +20,7 @@ use function unserialize;
  */
 class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
 {
-    /** @var Profiler */
+    /** @var null|Profiler */
     protected $profiler;
 
     /**
@@ -72,7 +75,7 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
     /**
      * Returns Bjy's Db Profiler
      *
-     * @return Profiler
+     * @return null|Profiler
      */
     public function getProfiler()
     {
@@ -97,10 +100,13 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
      * what kind of queries you want to get, e.g. Profiler::INSERT.
      *
      * @param  integer|null $mode
-     * @return self
+     * @return null|integer
      */
     public function getQueryCount($mode = null)
     {
+        if ($this->profiler === null) {
+            return null;
+        }
         return count($this->profiler->getQueryProfiles($mode));
     }
 
@@ -125,11 +131,11 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function __serialize()
     {
-        return serialize($this->profiler);
+        return ['profiler' => $this->profiler];
     }
 
     /**
@@ -140,16 +146,18 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
      */
     public function serialize()
     {
-        return $this->__serialize();
+        return serialize($this->__serialize());
     }
 
     /**
-     * @param string $profiler
+     * @param array $data
      * @return void
      */
-    public function __unserialize($profiler)
+    public function __unserialize($data)
     {
-        $this->profiler = unserialize($profiler);
+        assert(array_key_exists('profiler', $data));
+        assert($data['profiler'] === null || $data['profiler'] instanceof Profiler);
+        $this->profiler = $data['profiler'];
     }
 
     /**
@@ -158,8 +166,10 @@ class DbCollector implements CollectorInterface, AutoHideInterface, Serializable
      *
      * @inheritDoc
      */
-    public function unserialize($profiler)
+    public function unserialize($serialized)
     {
-        $this->__unserialize($profiler);
+        $data = unserialize($serialized);
+        assert(is_array($data));
+        $this->__unserialize($data);
     }
 }
