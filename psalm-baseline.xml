@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
+<files psalm-version="5.19.1@b9583493b08eb36259c0f6b746a787c4c9b3ac45">
   <file src="src/Collector/AbstractCollector.php">
     <MethodSignatureMustProvideReturnType>
       <code>serialize</code>
@@ -253,9 +253,6 @@
       <code>$controller</code>
       <code><![CDATA[$this->data['action']]]></code>
     </MixedArgument>
-    <MixedArrayAssignment>
-      <code>$views[]</code>
-    </MixedArrayAssignment>
     <MixedAssignment>
       <code>$controller</code>
       <code>$var</code>
