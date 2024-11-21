@@ -31,7 +31,7 @@
         }
     },
     "require": {
-        "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
         "laminas/laminas-eventmanager": "^3.4",
         "laminas/laminas-http": "^2.15",
         "laminas/laminas-modulemanager": "^2.10",
