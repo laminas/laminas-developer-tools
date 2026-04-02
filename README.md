@@ -3,6 +3,16 @@
 [![Build Status](https://travis-ci.com/laminas/laminas-developer-tools.svg?branch=master)](https://travis-ci.com/laminas/laminas-developer-tools)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-developer-tools/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-developer-tools?branch=master)
 
+> [!CAUTION]
+>
+> ## Maintenance mode
+>
+> This package is considered feature-complete, and is now in **security-only** maintenance mode, following a decision by the Technical Steering Committee.
+> More information on this decision can be found in a blog post: [Laminas MVC End of Life Schedule](https://getlaminas.org/blog/2026-03-06-laminas-mvc-eol-schedule.html).  
+> The security-only status will continue until the security support for PHP 8.4 ends, which will be 31st December 2028.
+>
+> If you have a security issue, please [follow our security reporting guidelines](https://getlaminas.org/security/).
+
 Module providing debug tools for use with [laminas-mvc](https://docs.laminas.dev/laminas-mvc) applications.
 
 ## Installation
