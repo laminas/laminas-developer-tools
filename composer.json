@@ -31,7 +31,7 @@
         }
     },
     "require": {
-        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "laminas/laminas-eventmanager": "^3.4",
         "laminas/laminas-http": "^2.15",
         "laminas/laminas-modulemanager": "^2.10",
@@ -44,7 +44,7 @@
     "require-dev": {
         "laminas/laminas-coding-standard": "~3.1.0",
         "phpunit/phpunit": "^10.5.38",
-        "psalm/plugin-phpunit": "^0.19.0",
+        "psalm/plugin-phpunit": "^0.20.0",
         "vimeo/psalm": "^5.26.1"
     },
     "suggest": {
